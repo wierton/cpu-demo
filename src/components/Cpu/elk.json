@@ -1,0 +1,1115 @@
+{
+  "id": "core",
+  "children": [
+    {
+      "id": "IFU",
+      "labels": "IFU",
+      "ports": [
+        {
+          "id": "IFU_NORTH_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "NORTH",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "IFU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "IFU_EAST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "IFU_EAST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "3"
+          }
+        },
+        {
+          "id": "IFU_EAST_3",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "4"
+          }
+        },
+        {
+          "id": "IFU_EAST_4",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "5"
+          }
+        },
+        {
+          "id": "IFU_EAST_5",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "6"
+          }
+        },
+        {
+          "id": "IFU_EAST_6",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "7"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 100,
+      "x": 30,
+      "y": 180
+    },
+    {
+      "id": "TLB",
+      "labels": "TLB",
+      "ports": [
+        {
+          "id": "TLB_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "TLB_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "TLB_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "TLB_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "3"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 100,
+      "x": 150,
+      "y": 250
+    },
+    {
+      "id": "IDU",
+      "labels": "IDU",
+      "ports": [
+        {
+          "id": "IDU_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "IDU_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "IDU_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "IDU_WEST_3",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "3"
+          }
+        },
+        {
+          "id": "IDU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "4"
+          }
+        },
+        {
+          "id": "IDU_EAST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "5"
+          }
+        },
+        {
+          "id": "IDU_EAST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "6"
+          }
+        },
+        {
+          "id": "IDU_EAST_3",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "7"
+          }
+        },
+        {
+          "id": "IDU_EAST_4",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "8"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 100,
+      "x": 150,
+      "y": 100
+    },
+    {
+      "id": "ISU",
+      "labels": "ISU",
+      "ports": [
+        {
+          "id": "ISU_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "ISU_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "ISU_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "ISU_WEST_3",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "3"
+          }
+        },
+        {
+          "id": "ISU_WEST_4",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "4"
+          }
+        },
+        {
+          "id": "ISU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "5"
+          }
+        },
+        {
+          "id": "ISU_EAST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "6"
+          }
+        },
+        {
+          "id": "ISU_EAST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "7"
+          }
+        },
+        {
+          "id": "ISU_EAST_3",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "8"
+          }
+        },
+        {
+          "id": "ISU_EAST_4",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "9"
+          }
+        },
+        {
+          "id": "ISU_EAST_5",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "10"
+          }
+        },
+        {
+          "id": "ISU_EAST_6",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "11"
+          }
+        },
+        {
+          "id": "ISU_EAST_7",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "12"
+          }
+        },
+        {
+          "id": "ISU_EAST_8",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "13"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 100,
+      "x": 280,
+      "y": 180
+    },
+    {
+      "id": "EXU",
+      "labels": "EXU",
+      "ports": [
+        {
+          "id": "EXU_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "EXU_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "EXU_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "EXU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "3"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 40,
+      "x": 410,
+      "y": 100
+    },
+    {
+      "id": "BRU",
+      "labels": "BRU",
+      "ports": [
+        {
+          "id": "BRU_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "BRU_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "BRU_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "BRU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "3"
+          }
+        },
+        {
+          "id": "BRU_EAST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "4"
+          }
+        },
+        {
+          "id": "BRU_EAST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "5"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 40,
+      "x": 410,
+      "y": 210
+    },
+    {
+      "id": "LSU",
+      "labels": "LSU",
+      "ports": [
+        {
+          "id": "LSU_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "LSU_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "LSU_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "LSU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "3"
+          }
+        },
+        {
+          "id": "LSU_SOUTH_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "SOUTH",
+            "port.index": "4"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 40,
+      "x": 410,
+      "y": 300
+    },
+    {
+      "id": "WBU",
+      "labels": "WBU",
+      "ports": [
+        {
+          "id": "WBU_WEST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "0"
+          }
+        },
+        {
+          "id": "WBU_WEST_1",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "1"
+          }
+        },
+        {
+          "id": "WBU_WEST_2",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "2"
+          }
+        },
+        {
+          "id": "WBU_WEST_3",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "3"
+          }
+        },
+        {
+          "id": "WBU_WEST_4",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "WEST",
+            "port.index": "4"
+          }
+        },
+        {
+          "id": "WBU_NORTH_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "NORTH",
+            "port.index": "5"
+          }
+        },
+        {
+          "id": "WBU_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "6"
+          }
+        }
+      ],
+      "width": 60,
+      "height": 100,
+      "x": 530,
+      "y": 180
+    },
+    {
+      "id": "CP0",
+      "labels": "CP0",
+      "ports": [
+        {
+          "id": "CP0_EAST_0",
+          "width": 7,
+          "height": 7,
+          "layoutOptions": {
+            "port.side": "EAST",
+            "port.index": "0"
+          }
+        }
+      ],
+      "width": 50,
+      "height": 50,
+      "x": 540,
+      "y": 40
+    }
+  ],
+  "edges": [
+    {
+      "id": "IFU_IDU_e0",
+      "sources": [
+        "IFU_EAST_0"
+      ],
+      "targets": [
+        "IDU_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":190
+        },
+        {
+          "x":125,"y":118
+        }
+      ]
+    },
+    {
+      "id": "IFU_IDU_e1",
+      "sources": [
+        "IFU_EAST_1"
+      ],
+      "targets": [
+        "IDU_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":203
+        },
+        {
+          "x":125,"y":140
+        }
+      ]
+    },
+    {
+      "id": "IFU_IDU_e2",
+      "sources": [
+        "IFU_EAST_2"
+      ],
+      "targets": [
+        "IDU_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":217
+        },
+        {
+          "x":125,"y":160
+        }
+      ]
+    },
+    {
+      "id": "IFU_IDU_e3",
+      "sources": [
+        "IFU_EAST_3"
+      ],
+      "targets": [
+        "IDU_WEST_3"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":230
+        },
+        {
+          "x":125,"y":182
+        }
+      ]
+    },
+    {
+      "id": "IFU_TLB_e0",
+      "sources": [
+        "IFU_EAST_4"
+      ],
+      "targets": [
+        "TLB_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":243
+        },
+        {
+          "x":125,"y":273
+        }
+      ]
+    },
+    {
+      "id": "IFU_TLB_e1",
+      "sources": [
+        "IFU_EAST_5"
+      ],
+      "targets": [
+        "TLB_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":257
+        },
+        {
+          "x":125,"y":300
+        }
+      ]
+    },
+    {
+      "id": "IFU_TLB_e2",
+      "sources": [
+        "IFU_EAST_6"
+      ],
+      "targets": [
+        "TLB_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":125,"y":270
+        },
+        {
+          "x":125,"y":326
+        }
+      ]
+    },
+    {
+      "id": "IFU_WBU_e0",
+      "sources": [
+        "IFU_NORTH_0"
+      ],
+      "targets": [
+        "WBU_NORTH_0"
+      ],
+      "vertices":[
+        {
+          "x":60,"y":95
+        },
+        {
+          "x":560,"y":95
+        }
+      ]
+    },
+    {
+      "id": "IDU_ISU_e0",
+      "sources": [
+        "IDU_EAST_0"
+      ],
+      "targets": [
+        "ISU_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":245,"y":114
+        },
+        {
+          "x":245,"y":195
+        }
+      ]
+    },
+    {
+      "id": "IDU_ISU_e1",
+      "sources": [
+        "IDU_EAST_1"
+      ],
+      "targets": [
+        "ISU_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":245,"y":132
+        },
+        {
+          "x":245,"y":212
+        }
+      ]
+    },
+    {
+      "id": "IDU_ISU_e2",
+      "sources": [
+        "IDU_EAST_2"
+      ],
+      "targets": [
+        "ISU_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":245,"y":150
+        },
+        {
+          "x":245,"y":230
+        }
+      ]
+    },
+    {
+      "id": "IDU_ISU_e3",
+      "sources": [
+        "IDU_EAST_3"
+      ],
+      "targets": [
+        "ISU_WEST_3"
+      ],
+      "vertices":[
+        {
+          "x":245,"y":168
+        },
+        {
+          "x":245,"y":248
+        }
+      ]
+    },
+    {
+      "id": "IDU_ISU_e4",
+      "sources": [
+        "IDU_EAST_4"
+      ],
+      "targets": [
+        "ISU_WEST_4"
+      ],
+      "vertices":[
+        {
+          "x":245,"y":186
+        },
+        {
+          "x":245,"y":265
+        }
+      ]
+    },
+    {
+      "id": "ISU_EXU_e0",
+      "sources": [
+        "ISU_EAST_0"
+      ],
+      "targets": [
+        "EXU_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":187
+        },
+        {
+          "x":380,"y":109
+        }
+      ]
+    },
+    {
+      "id": "ISU_EXU_e1",
+      "sources": [
+        "ISU_EAST_1"
+      ],
+      "targets": [
+        "EXU_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":198
+        },
+        {
+          "x":380,"y":120
+        }
+      ]
+    },
+    {
+      "id": "ISU_EXU_e2",
+      "sources": [
+        "ISU_EAST_2"
+      ],
+      "targets": [
+        "EXU_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":209
+        },
+        {
+          "x":380,"y":132
+        }
+      ]
+    },
+    {
+      "id": "ISU_BRU_e0",
+      "sources": [
+        "ISU_EAST_3"
+      ],
+      "targets": [
+        "BRU_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":219
+        },
+        {
+          "x":380,"y":218
+        }
+      ]
+    },
+    {
+      "id": "ISU_BRU_e1",
+      "sources": [
+        "ISU_EAST_4"
+      ],
+      "targets": [
+        "BRU_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":230
+        },
+        {
+          "x":380,"y":230
+        }
+      ]
+    },
+    {
+      "id": "ISU_BRU_e2",
+      "sources": [
+        "ISU_EAST_5"
+      ],
+      "targets": [
+        "BRU_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":241
+        },
+        {
+          "x":380,"y":241
+        }
+      ]
+    },
+    {
+      "id": "ISU_LSU_e0",
+      "sources": [
+        "ISU_EAST_6"
+      ],
+      "targets": [
+        "LSU_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":252
+        },
+        {
+          "x":380,"y":307
+        }
+      ]
+    },
+    {
+      "id": "ISU_LSU_e1",
+      "sources": [
+        "ISU_EAST_7"
+      ],
+      "targets": [
+        "LSU_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":263
+        },
+        {
+          "x":380,"y":319
+        }
+      ]
+    },
+    {
+      "id": "ISU_LSU_e2",
+      "sources": [
+        "ISU_EAST_8"
+      ],
+      "targets": [
+        "LSU_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":380,"y":274
+        },
+        {
+          "x":380,"y":331
+        }
+      ]
+    },
+    {
+      "id": "EXU_WBU_e0",
+      "sources": [
+        "EXU_EAST_0"
+      ],
+      "targets": [
+        "WBU_WEST_0"
+      ],
+      "vertices":[
+        {
+          "x":500,"y":120
+        },
+        {
+          "x":500,"y":195
+        }
+      ]
+    },
+    {
+      "id": "BRU_WBU_e0",
+      "sources": [
+        "BRU_EAST_0"
+      ],
+      "targets": [
+        "WBU_WEST_1"
+      ],
+      "vertices":[
+        {
+          "x":500,"y":218
+        },
+        {
+          "x":500,"y":213
+        }
+      ]
+    },
+    {
+      "id": "BRU_WBU_e1",
+      "sources": [
+        "BRU_EAST_1"
+      ],
+      "targets": [
+        "WBU_WEST_2"
+      ],
+      "vertices":[
+        {
+          "x":500,"y":230
+        },
+        {
+          "x":500,"y":230
+        }
+      ]
+    },
+    {
+      "id": "BRU_WBU_e2",
+      "sources": [
+        "BRU_EAST_2"
+      ],
+      "targets": [
+        "WBU_WEST_3"
+      ],
+      "vertices":[
+        {
+          "x":500,"y":242
+        },
+        {
+          "x":500,"y":248
+        }
+      ]
+    },
+    {
+      "id": "LSU_WBU_e0",
+      "sources": [
+        "LSU_EAST_0"
+      ],
+      "targets": [
+        "WBU_WEST_4"
+      ],
+      "vertices":[
+        {
+          "x":500,"y":320
+        },
+        {
+          "x":500,"y":265
+        }
+      ]
+    },
+    {
+      "id": "TLB_LSU_e0",
+      "sources": [
+        "TLB_EAST_0"
+      ],
+      "targets": [
+        "LSU_SOUTH_0"
+      ],
+      "vertices":[
+        {
+          "x":245,"y":300
+        },
+        {
+          "x":245,"y":370
+        },
+        {
+          "x":440,"y":370
+        }
+      ]
+    },
+    {
+      "id": "WBU_CP0_e0",
+      "sources": [
+        "WBU_EAST_0"
+      ],
+      "targets": [
+        "CP0_EAST_0"
+      ],
+      "vertices":[
+        {
+          "x":610,"y":230
+        },
+        {
+          "x":610,"y":62
+        }
+      ]
+    }
+  ]
+}

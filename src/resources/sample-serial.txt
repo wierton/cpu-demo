@@ -1,0 +1,53 @@
+[    0.000000] Linux version 5.3.0+ (wierton@wierton-OptiPlex-7050) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #134 Mon Oct 11 09:09:13 CST 2021
+[    0.000000] printk: bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 00018000 (MIPS 4Kc)
+[    0.000000] MIPS: machine is uart0
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 08000000 @ 00000000 (usable)
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] Primary instruction cache 16kB, VIPT, 4-way, linesize 16 bytes.
+[    0.000000] Primary data cache 16kB, 4-way, VIPT, no aliases, linesize 16 bytes
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32512
+[    0.000000] Kernel command line: cca=0 lpj=200 console=ttyUL0,115200n8 rootfstype=ext4 root=/dev/mtdblock0 rw
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+8011b6d4: mtc0 $0 , $6, 0
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 125944K/131072K available (1882K kernel code, 116K rwdata, 308K rodata, 1336K init, 308K bss, 5128K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 128
+[    0.000000] random: get_random_bytes called from start_kernel+0x378/0x568 with crng_init=0
+[    0.000000] mips_hpt_frequency: 50000000 HZ
+[    0.000000] clocksource: MIPS: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 38225208935 ns
+[    0.000061] sched_clock: 32 bits at 50MHz, resolution 20ns, wraps every 42949672950ns
+[    0.001317] Console: colour dummy device 80x25
+[    0.001492] Calibrating delay loop (skipped) preset value.. 0.40 BogoMIPS (lpj=200)
+[    0.001720] pid_max: default: 32768 minimum: 301
+[    0.002862] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.003049] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.011926] devtmpfs: initialized
+[    0.020992] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.021164] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    0.021373] pinctrl core: initialized pinctrl subsystem
+[    0.099053] clocksource: Switched to clocksource MIPS
+[    0.260089] random: fast init done
+[    0.322662] workingset: timestamp_bits=30 max_order=15 bucket_order=0
+[    0.384359] 1fe50000.serial: ttyUL0 at MMIO 0x1fe50000 (irq = 4, base_baud = 0) is a uartlite
+[    0.384550] printk: console [ttyUL0] enabled
+[    0.384550] printk: console [ttyUL0] enabled
+[    0.384718] printk: bootconsole [early0] disabled
+[    0.384718] printk: bootconsole [early0] disabled
+[    0.393126] Warning: unable to open an initial console.
+[    0.406164] Freeing unused kernel memory: 1336K
+[    0.406301] This architecture does not have kernel memory protection.
+[    0.406470] Run /init as init process
+starting pid 16, tty '': '/etc/init.d/rcS'
+can't run '/etc/init.d/rcS': No such file or directory
+
+Please press Enter to activate this console.
