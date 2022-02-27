@@ -359,66 +359,66 @@ export default function Cpu() {
         ]
       }
     })
-    const image6Node = graph.addNode({
-      id: 'image6-node',
-      x: 850,
-      y: 700,
-      shape: 'image-node',
-      component:
-        <LogAndVGA />,
-      ports: {
-        items: [
-          {
-            id: "image6-port1",
-            group: 'port',
-            args: {
-              x: 91,
-              y: -5,
-            },
-            size: {
-              width: 3,
-              height: 3,
-            },
-          },
-          {
-            id: "image6-port2",
-            group: 'port',
-            args: {
-              x: 96,
-              y: -5,
-            },
-            size: {
-              width: 3,
-              height: 3,
-            },
-          },
-          {
-            id: "image6-port3",
-            group: 'port',
-            args: {
-              x: 101,
-              y: -5,
-            },
-            size: {
-              width: 3,
-              height: 3,
-            },
-          },
-          {
-            id: "image6-port4",
-            group: 'port',
-            args: {
-              x: 106,
-              y: -5,
-            },
-            size: {
-              width: 3,
-              height: 3,
-            },
-          },
-        ]
-      }
-    })
+    // const image6Node = graph.addNode({
+    //   id: 'image6-node',
+    //   x: 850,
+    //   y: 700,
+    //   shape: 'image-node',
+    //   component:
+    //     <LogAndVGA />,
+    //   ports: {
+    //     items: [
+    //       {
+    //         id: "image6-port1",
+    //         group: 'port',
+    //         args: {
+    //           x: 91,
+    //           y: -5,
+    //         },
+    //         size: {
+    //           width: 3,
+    //           height: 3,
+    //         },
+    //       },
+    //       {
+    //         id: "image6-port2",
+    //         group: 'port',
+    //         args: {
+    //           x: 96,
+    //           y: -5,
+    //         },
+    //         size: {
+    //           width: 3,
+    //           height: 3,
+    //         },
+    //       },
+    //       {
+    //         id: "image6-port3",
+    //         group: 'port',
+    //         args: {
+    //           x: 101,
+    //           y: -5,
+    //         },
+    //         size: {
+    //           width: 3,
+    //           height: 3,
+    //         },
+    //       },
+    //       {
+    //         id: "image6-port4",
+    //         group: 'port',
+    //         args: {
+    //           x: 106,
+    //           y: -5,
+    //         },
+    //         size: {
+    //           width: 3,
+    //           height: 3,
+    //         },
+    //       },
+    //     ]
+    //   }
+    // })
 
     const boardNode = graph.addNode({
       id: 'board',
@@ -800,30 +800,30 @@ export default function Cpu() {
       router: 'orth'
     })
 
-    graph.addEdge({
-      shape: 'green-edge',
-      source: { cell: boardNode, port: 'GPIO-port1' },
-      target: { cell: 'image6-node', port: 'image6-port1' },
-      router: 'orth'
-    })
-    graph.addEdge({
-      shape: 'green-edge',
-      source: { cell: boardNode, port: 'GPIO-port2' },
-      target: { cell: 'image6-node', port: 'image6-port2' },
-      router: 'orth'
-    })
-    graph.addEdge({
-      shape: 'green-edge',
-      source: { cell: boardNode, port: 'GPIO-port3' },
-      target: { cell: 'image6-node', port: 'image6-port3' },
-      router: 'orth'
-    })
-    graph.addEdge({
-      shape: 'green-edge',
-      source: { cell: boardNode, port: 'GPIO-port4' },
-      target: { cell: 'image6-node', port: 'image6-port4' },
-      router: 'orth'
-    })
+    // graph.addEdge({
+    //   shape: 'green-edge',
+    //   source: { cell: boardNode, port: 'GPIO-port1' },
+    //   target: { cell: 'image6-node', port: 'image6-port1' },
+    //   router: 'orth'
+    // })
+    // graph.addEdge({
+    //   shape: 'green-edge',
+    //   source: { cell: boardNode, port: 'GPIO-port2' },
+    //   target: { cell: 'image6-node', port: 'image6-port2' },
+    //   router: 'orth'
+    // })
+    // graph.addEdge({
+    //   shape: 'green-edge',
+    //   source: { cell: boardNode, port: 'GPIO-port3' },
+    //   target: { cell: 'image6-node', port: 'image6-port3' },
+    //   router: 'orth'
+    // })
+    // graph.addEdge({
+    //   shape: 'green-edge',
+    //   source: { cell: boardNode, port: 'GPIO-port4' },
+    //   target: { cell: 'image6-node', port: 'image6-port4' },
+    //   router: 'orth'
+    // })
     setGraphInstance(graph)
   }, [])
 
@@ -1065,6 +1065,21 @@ export default function Cpu() {
       source: { cell: 'board', port: 'AXI4-VGA-port4' },
       target: { cell: 'image4-node', port: 'image4-port4' },
       router: 'orth'
+    })
+
+    graphInstance.addNode({
+      shape: 'circle',
+      x: 703,
+      y: 182,
+      width: 20,
+      height: 20,
+      id: 'error-circle',
+      attrs: {
+        body: {
+          fill: 'rgba(255,0,0,0.5)',
+          stroke: 'rgba(255,0,0,0.5)',
+        },
+      },
     })
   }
 
