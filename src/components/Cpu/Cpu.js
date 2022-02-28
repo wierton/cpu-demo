@@ -1155,11 +1155,11 @@ export default function Cpu() {
               disabled={cycle === maxCycle ? true : false}
               onClick={() => {
                 setIsStart(true)
-                let step = Math.floor(maxCycle / 200)
+                let step = Math.floor(maxCycle / 100)
                 setIntervalInstance(
                   setInterval(() => {
                     setCycle(prev => prev + step)
-                  }, 500)
+                  }, 1000)
                 )
               }}
             />
