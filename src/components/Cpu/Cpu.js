@@ -58,6 +58,17 @@ export default function Cpu() {
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
+    if (cycle === maxCycle) {
+      clearInterval(intervalInstance);
+      setIsStart(false)
+    } else if (cycle > maxCycle) {
+      clearInterval(intervalInstance);
+      setCycle(maxCycle)
+      setIsStart(false)
+    }
+  }, [cycle, maxCycle, isStart])
+
+  useEffect(() => {
     const debugFile = hasBug ? "with_bug" : "without_bug";
     fetch(`./programs/${program}/${debugFile}/registers.txt`)
       .then(res => res.text())
@@ -1105,17 +1116,24 @@ export default function Cpu() {
         </Col>
         <Col span={1}></Col>
         <Col span={1}>
-          {cycle === 0 ?
+          {/* {cycle === 0 ?
             <Button type="primary" shape="circle" icon={<StepBackwardOutlined />} disabled /> :
             <Button type="primary" shape="circle" icon={<StepBackwardOutlined />}
               onClick={() => {
                 setCycle(prev => prev - 1)
               }}
-            />}
+            />} */}
+          <Button type="primary" shape="circle" icon={<StepBackwardOutlined />}
+            disabled={cycle === 0 ? true : false}
+            onClick={() => {
+              setCycle(prev => prev - 1)
+            }}
+          />
         </Col>
         <Col span={1}>
           {isStart ?
             <Button type="primary" shape="circle" icon={<PauseCircleOutlined />}
+              disabled={cycle === maxCycle ? true : false}
               onClick={() => {
                 setIsStart(false)
                 clearInterval(intervalInstance)
@@ -1123,26 +1141,33 @@ export default function Cpu() {
               }}
             /> :
             <Button type="primary" shape="circle" icon={<PlayCircleOutlined />}
+              disabled={cycle === maxCycle ? true : false}
               onClick={() => {
                 setIsStart(true)
                 setIntervalInstance(
                   setInterval(() => {
-                    setCycle(prev => prev + 1)
-                  }, 5000)
+                    setCycle(prev => prev + 5000000)
+                  }, 1000)
                 )
               }}
             />
           }
         </Col>
         <Col span={1}>
-          {cycle === maxCycle ?
+          {/* {cycle === maxCycle ?
             <Button type="primary" shape="circle" icon={<StepForwardOutlined />} disabled /> :
             <Button type="primary" shape="circle" icon={<StepForwardOutlined />}
               onClick={() => {
                 setCycle(prev => prev + 1)
               }}
             />
-          }
+          } */}
+          <Button type="primary" shape="circle" icon={<StepForwardOutlined />}
+            disabled={cycle === maxCycle ? true : false}
+            onClick={() => {
+              setCycle(prev => prev + 1)
+            }}
+          />
         </Col>
         <Col span={4}>运行模式:
           <Select defaultValue="无bug" style={{ width: 120 }}

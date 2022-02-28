@@ -1,50 +1,52 @@
 import React, { useState, useEffect } from "react";
 
-const printVGALog = (log, cycle,type,changeStyle) => {
+const printVGALog = (log, cycle, type, changeStyle) => {
   let res = []
+  let emptyFlag = true
   for (let i of log) {
     // console.log(i)
-    if (i.cycle===cycle) {
-      let {cpuValue,simulatorValue}=i
-      cpuValue=cpuValue.slice(1,cpuValue.length-1);
-      simulatorValue=simulatorValue.slice(1,simulatorValue.length-1);
-      
-      let cpuValues=cpuValue.split(",");
-      let simulatorValues=simulatorValue.split(",");
-      cpuValues=cpuValues.map(e=>e.trim());
-      simulatorValues=simulatorValues.map(e=>e.trim());
-      const cpuLen=cpuValues.length;
-      const simulatorLen=simulatorValues.length;
-      const min=cpuLen<simulatorLen?cpuLen:simulatorLen
-      if(type==='cpu'){
-        for(let j=0;j<min;j++){
-          if(cpuValues[j]===simulatorValues[j]){
+    if (i.cycle === cycle) {
+      emptyFlag = false
+      let { cpuValue, simulatorValue } = i
+      cpuValue = cpuValue.slice(1, cpuValue.length - 1);
+      simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
+
+      let cpuValues = cpuValue.split(",");
+      let simulatorValues = simulatorValue.split(",");
+      cpuValues = cpuValues.map(e => e.trim());
+      simulatorValues = simulatorValues.map(e => e.trim());
+      const cpuLen = cpuValues.length;
+      const simulatorLen = simulatorValues.length;
+      const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
+      if (type === 'cpu') {
+        for (let j = 0; j < min; j++) {
+          if (cpuValues[j] === simulatorValues[j]) {
             res.push(
               <>
-                <span>{cpuValues[j]}</span><br/>
+                <span>{cpuValues[j]}</span><br />
               </>
             )
-          }else{
+          } else {
             changeStyle()
             res.push(
               <>
-                <span style={{backgroundColor:'red'}}>{cpuValues[j]}</span><br/>
+                <span style={{ backgroundColor: 'red' }}>{cpuValues[j]}</span><br />
               </>
             )
           }
         }
-      }else if(type==='simulator'){
-        for(let j=0;j<min;j++){
-          if(cpuValues[j]===simulatorValues[j]){
+      } else if (type === 'simulator') {
+        for (let j = 0; j < min; j++) {
+          if (cpuValues[j] === simulatorValues[j]) {
             res.push(
               <>
-                <span>{simulatorValues[j]}</span><br/>
+                <span>{simulatorValues[j]}</span><br />
               </>
             )
-          }else{
+          } else {
             res.push(
               <>
-                <span style={{backgroundColor:'red'}}>{simulatorValues[j]}</span><br/>
+                <span style={{ backgroundColor: 'red' }}>{simulatorValues[j]}</span><br />
               </>
             )
           }
@@ -54,33 +56,42 @@ const printVGALog = (log, cycle,type,changeStyle) => {
       break;
     }
   }
+  if (emptyFlag) {
+    for (let i = 0; i < 10; i++) {
+      res.push(
+        <>
+          <span>0x0</span><br />
+        </>
+      )
+    }
+  }
   return res
 }
-export default function VGA({program,hasbug,cycle,changeStyle}) {
+export default function VGA({ program, hasbug, cycle, changeStyle }) {
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
   const [VGALog, setVGALog] = useState([])
-  
+
   useEffect(() => {
-    fetch(`./programs/${program?program:'linux'}/${hasbug?'with_bug':'without_bug'}/registers.txt`)
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? 'with_bug' : 'without_bug'}/registers.txt`)
       .then(r => r.text())
       .then(text => {
-        const registers=text.split('\n');
-        const registersArray=[]
-        for(let i of registers){
-          const startIndex=i.indexOf('(');
-          const endIndex=i.lastIndexOf(')');
-          if(startIndex>-1&&endIndex>-1){
-            const register=i.slice(startIndex+1,endIndex);
-            const first=register.indexOf(",");
-            const second=register.indexOf(",",first+1);
-            const right=register.indexOf("]",second+1);
-            const third=register.indexOf(",",right+1);
-            
-            const currentCycle=parseInt(register.slice(0,first).trim());
-            const isEqual=Boolean(register.slice(first+1,second).trim());
-            const cpuValue=register.slice(second+1,third).trim();
-            const simulatorValue=register.slice(third+1).trim();
-            registersArray.push({cycle:currentCycle,isEqual,cpuValue,simulatorValue})
+        const registers = text.split('\n');
+        const registersArray = []
+        for (let i of registers) {
+          const startIndex = i.indexOf('(');
+          const endIndex = i.lastIndexOf(')');
+          if (startIndex > -1 && endIndex > -1) {
+            const register = i.slice(startIndex + 1, endIndex);
+            const first = register.indexOf(",");
+            const second = register.indexOf(",", first + 1);
+            const right = register.indexOf("]", second + 1);
+            const third = register.indexOf(",", right + 1);
+
+            const currentCycle = parseInt(register.slice(0, first).trim());
+            const isEqual = Boolean(register.slice(first + 1, second).trim());
+            const cpuValue = register.slice(second + 1, third).trim();
+            const simulatorValue = register.slice(third + 1).trim();
+            registersArray.push({ cycle: currentCycle, isEqual, cpuValue, simulatorValue })
           }
         }
         setVGALog(registersArray)
@@ -127,11 +138,11 @@ export default function VGA({program,hasbug,cycle,changeStyle}) {
         borderRadius: '0px 0px 10px 10px',
         padding: '5px',
       }}>
-        <div style={{width:'50%',boxSizing:'border-box',float:'left'}}>
-          {VGALog.length>0?printVGALog(VGALog,parseInt(cycle),'cpu',changeStyle):null}
+        <div style={{ width: '50%', boxSizing: 'border-box', float: 'left' }}>
+          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'cpu', changeStyle) : null}
         </div>
-        <div style={{width:'50%',boxSizing:'border-box',float:'left'}}>
-          {VGALog.length>0?printVGALog(VGALog,parseInt(cycle),'simulator'):null}
+        <div style={{ width: '50%', boxSizing: 'border-box', float: 'left' }}>
+          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'simulator') : null}
         </div>
         {/* {VGALog.length>0?printVGALog(VGALog,parseInt(cycle)):null} */}
       </div>
