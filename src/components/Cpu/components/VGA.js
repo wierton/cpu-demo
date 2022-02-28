@@ -1,73 +1,73 @@
 import React, { useState, useEffect } from "react";
 
-const printVGALog = (log, cycle, type, changeStyle) => {
+const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle) => {
+  let closedDistance = Infinity;
+  let closedCycleIndex = 0;
+  log.forEach((l, index) => {
+    let temp = Math.abs(l.cycle - cycle)
+    if (temp < closedDistance) {
+      closedDistance = temp
+      closedCycleIndex = index
+    }
+  })
+
   let res = []
-  let emptyFlag = true
-  for (let i of log) {
-    // console.log(i)
-    if (i.cycle === cycle) {
-      emptyFlag = false
-      let { cpuValue, simulatorValue } = i
-      cpuValue = cpuValue.slice(1, cpuValue.length - 1);
-      simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
+  let hasErrorflag = false
 
-      let cpuValues = cpuValue.split(",");
-      let simulatorValues = simulatorValue.split(",");
-      cpuValues = cpuValues.map(e => e.trim());
-      simulatorValues = simulatorValues.map(e => e.trim());
-      const cpuLen = cpuValues.length;
-      const simulatorLen = simulatorValues.length;
-      const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
-      if (type === 'cpu') {
-        for (let j = 0; j < min; j++) {
-          if (cpuValues[j] === simulatorValues[j]) {
-            res.push(
-              <>
-                <span>{cpuValues[j]}</span><br />
-              </>
-            )
-          } else {
-            changeStyle()
-            res.push(
-              <>
-                <span style={{ backgroundColor: 'red' }}>{cpuValues[j]}</span><br />
-              </>
-            )
-          }
-        }
-      } else if (type === 'simulator') {
-        for (let j = 0; j < min; j++) {
-          if (cpuValues[j] === simulatorValues[j]) {
-            res.push(
-              <>
-                <span>{simulatorValues[j]}</span><br />
-              </>
-            )
-          } else {
-            res.push(
-              <>
-                <span style={{ backgroundColor: 'red' }}>{simulatorValues[j]}</span><br />
-              </>
-            )
-          }
-        }
+  let { cpuValue, simulatorValue } = log[closedCycleIndex]
+  cpuValue = cpuValue.slice(1, cpuValue.length - 1);
+  simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
+
+  let cpuValues = cpuValue.split(",");
+  let simulatorValues = simulatorValue.split(",");
+  cpuValues = cpuValues.map(e => e.trim());
+  simulatorValues = simulatorValues.map(e => e.trim());
+  const cpuLen = cpuValues.length;
+  const simulatorLen = simulatorValues.length;
+  const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
+  if (type === 'cpu') {
+    for (let j = 0; j < min; j++) {
+      if (cpuValues[j] === simulatorValues[j]) {
+        res.push(
+          <>
+            <span>{cpuValues[j]}</span><br />
+          </>
+        )
+      } else {
+        changeStyle()
+        hasErrorflag = true
+        res.push(
+          <>
+            <span style={{ backgroundColor: 'red' }}>{cpuValues[j]}</span><br />
+          </>
+        )
       }
-
-      break;
+    }
+  } else if (type === 'simulator') {
+    for (let j = 0; j < min; j++) {
+      if (cpuValues[j] === simulatorValues[j]) {
+        res.push(
+          <>
+            <span>{simulatorValues[j]}</span><br />
+          </>
+        )
+      } else {
+        hasErrorflag = true
+        res.push(
+          <>
+            <span style={{ backgroundColor: 'red' }}>{simulatorValues[j]}</span><br />
+          </>
+        )
+      }
     }
   }
-  if (emptyFlag) {
-    for (let i = 0; i < 10; i++) {
-      res.push(
-        <>
-          <span>0x0</span><br />
-        </>
-      )
-    }
+
+  if (!hasErrorflag) {
+    removeErrorCircle()
   }
   return res
 }
-export default function VGA({ program, hasbug, cycle, changeStyle }) {
+export default function VGA({ program, hasbug, cycle, changeStyle, removeErrorCircle }) {
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
   const [VGALog, setVGALog] = useState([])
 
@@ -139,10 +139,10 @@ export default function VGA({ program, hasbug, cycle, changeStyle }) {
         padding: '5px',
       }}>
         <div style={{ width: '50%', boxSizing: 'border-box', float: 'left' }}>
-          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'cpu', changeStyle) : null}
+          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'cpu', changeStyle, removeErrorCircle) : null}
         </div>
         <div style={{ width: '50%', boxSizing: 'border-box', float: 'left' }}>
-          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'simulator') : null}
+          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'simulator', changeStyle, removeErrorCircle) : null}
         </div>
         {/* {VGALog.length>0?printVGALog(VGALog,parseInt(cycle)):null} */}
       </div>

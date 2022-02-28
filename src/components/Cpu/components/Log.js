@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const display=(s)=>{
-  if(s==="\\r"){
+const display = (s) => {
+  if (s === "\\r") {
     return ''
-  }else if(s==="\\n"){
-    return(
-      <br/>
+  } else if (s === "\\n") {
+    return (
+      <br />
     )
-  }else if(s===" "){
+  } else if (s === " ") {
     return <span>&nbsp;</span>
   }
   return s;
@@ -32,6 +32,7 @@ export default function Log({ program, hasbug, cycle = 100 }) {
   const [log, setLog] = useState([])
   const [count, setCount] = useState(0)
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
+  const [displayLog,setDisplayLog]=useState(null)
   useEffect(() => {
     fetch(`./programs/${program ? program : 'linux'}/${hasbug ? 'with_bug' : 'without_bug'}/serial.txt`)
       .then(r => r.text())
@@ -53,6 +54,18 @@ export default function Log({ program, hasbug, cycle = 100 }) {
       });
   }, [])
 
+  useEffect(()=>{
+    if(log.length>0){
+      setDisplayLog(printLog(log, parseInt(cycle)))
+    }
+  },[log])
+
+  useEffect(()=>{
+    if(displayLog){
+      const d=document.getElementById('scrolldiv')
+      d.scrollTop = d.scrollHeight;
+    }
+  },[displayLog])
   // useEffect(() => {
   //   if (log.length > 0) {
   //     const interval = setInterval(() => {
@@ -79,9 +92,12 @@ export default function Log({ program, hasbug, cycle = 100 }) {
       }}
     >
       <div style={{ width: '300px', height: '25px', backgroundColor: '#AAAAAA', borderRadius: '10px 10px 0px 0px', color: 'white', paddingLeft: '15px' }}>menu</div>
-      <div style={{ width: '300px', height: '300px', overflow: 'auto', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 10px 10px' }}>
+      <div
+        id="scrolldiv"
+        style={{ width: '300px', height: '300px', overflow: 'auto', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 10px 10px' }}
+      >
         {/* {count >= 1 && log.length > 0 ? printLog(log, count) : null} */}
-        {cycle && log.length > 0 ? printLog(log, parseInt(cycle)) : null}
+        {displayLog}
       </div>
     </div>
   )

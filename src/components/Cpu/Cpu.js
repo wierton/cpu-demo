@@ -851,7 +851,12 @@ export default function Cpu() {
         y: 850,
         shape: 'image-node',
         component:
-          <VGA program={program} hasbug={hasBug} cycle={cycle} changeStyle={changeStyle} />,
+          <VGA
+            program={program}
+            hasbug={hasBug}
+            cycle={cycle}
+            changeStyle={changeStyle}
+            removeErrorCircle={removeErrorCircle} />,
         ports: {
           items: [
             {
@@ -1094,6 +1099,12 @@ export default function Cpu() {
     })
   }
 
+  const removeErrorCircle = () => {
+    if (graphInstance.hasCell('error-circle')) {
+      graphInstance.removeNode('error-circle')
+    }
+  }
+
   return (
     <div style={{ height: '100%' }}>
       <Row style={{ margin: '5px' }}>
@@ -1144,10 +1155,11 @@ export default function Cpu() {
               disabled={cycle === maxCycle ? true : false}
               onClick={() => {
                 setIsStart(true)
+                let step = Math.floor(maxCycle / 200)
                 setIntervalInstance(
                   setInterval(() => {
-                    setCycle(prev => prev + 5000000)
-                  }, 1000)
+                    setCycle(prev => prev + step)
+                  }, 500)
                 )
               }}
             />
