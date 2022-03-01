@@ -50,6 +50,8 @@ export default function Cpu() {
   const [currentDisplayCodeNode, setCurrentDisplayCodeNode] = useState(null)
 
   const [isStart, setIsStart] = useState(false)
+  const [addInterval, setAddInterval] = useState(false)
+
   const [intervalInstance, setIntervalInstance] = useState(null)
 
   const [hasBug, setHasBug] = useState(false)
@@ -57,16 +59,16 @@ export default function Cpu() {
 
   const [hasError, setHasError] = useState(false)
 
-  useEffect(() => {
-    if (cycle === maxCycle) {
-      clearInterval(intervalInstance);
-      setIsStart(false)
-    } else if (cycle > maxCycle) {
-      clearInterval(intervalInstance);
-      setCycle(maxCycle)
-      setIsStart(false)
-    }
-  }, [cycle, maxCycle, isStart])
+  // useEffect(() => {
+  //   if (cycle === maxCycle) {
+  //     clearInterval(intervalInstance);
+  //     setIsStart(false)
+  //   } else if (cycle > maxCycle) {
+  //     clearInterval(intervalInstance);
+  //     setCycle(maxCycle)
+  //     setIsStart(false)
+  //   }
+  // }, [cycle, maxCycle, isStart])
 
   useEffect(() => {
     const debugFile = hasBug ? "with_bug" : "without_bug";
@@ -118,20 +120,6 @@ export default function Cpu() {
       setCodeEvent({})
     }
   }, [codeEvent])
-
-  useEffect(() => {
-    if (graphInstance && currentDisplayCodeNode) {
-      graphInstance.removeNode(currentDisplayCodeNode + '-code')
-      graphInstance.addNode({
-        id: currentDisplayCodeNode + '-code',
-        x: 900,
-        y: 50,
-        shape: 'react-shape',
-        component:
-          <Code id={currentDisplayCodeNode} cycle={cycle} />
-      })
-    }
-  }, [graphInstance, program, hasBug, cycle])
 
   // useEffect(() => {
   //   const { id, e } = mapperEvent
@@ -442,7 +430,6 @@ export default function Cpu() {
           handleNodeContextMenu={handleNodeContextMenu}
           handleNodeMouseEnter={handleNodeMouseEnter}
           handleNodeMouseLeave={handleNodeMouseLeave}
-          hasError={hasError}
         />,
       ports: {
         items: [
@@ -840,7 +827,7 @@ export default function Cpu() {
 
 
   useEffect(() => {
-    if (graphInstance) {
+    if (graphInstance && !isStart) {
       graphInstance.removeNode('image5-node');
       graphInstance.removeNode('image4-node');
 
@@ -856,7 +843,8 @@ export default function Cpu() {
             hasbug={hasBug}
             cycle={cycle}
             changeStyle={changeStyle}
-            removeErrorCircle={removeErrorCircle} />,
+            removeErrorCircle={removeErrorCircle}
+          />,
         ports: {
           items: [
             {
@@ -1026,7 +1014,236 @@ export default function Cpu() {
         router: 'orth'
       })
     }
-  }, [graphInstance, program, hasBug, cycle, hasError])
+
+    if (graphInstance && currentDisplayCodeNode && !isStart) {
+      graphInstance.removeNode(currentDisplayCodeNode + '-code')
+      graphInstance.addNode({
+        id: currentDisplayCodeNode + '-code',
+        x: 900,
+        y: 50,
+        shape: 'react-shape',
+        component:
+          <Code
+            id={currentDisplayCodeNode}
+            cycle={cycle}
+          />
+      })
+    }
+  }, [graphInstance, program, hasBug, cycle, isStart])
+
+  useEffect(() => {
+    if (addInterval) {
+      if (graphInstance) {
+        graphInstance.removeNode('image5-node');
+        graphInstance.removeNode('image4-node');
+        const image4Node = graphInstance.addNode({
+          id: 'image4-node',
+          x: 490,
+          y: 850,
+          shape: 'image-node',
+          component:
+            <VGA
+              program={program}
+              hasbug={hasBug}
+              cycle={cycle}
+              changeStyle={changeStyle}
+              removeErrorCircle={removeErrorCircle}
+              needInterval={{ maxCycle, setCycle, setIsStart }}
+            />,
+          ports: {
+            items: [
+              {
+                id: "image4-port1",
+                group: 'port',
+                args: {
+                  x: 41,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port2",
+                group: 'port',
+                args: {
+                  x: 46,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port3",
+                group: 'port',
+                args: {
+                  x: 51,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port4",
+                group: 'port',
+                args: {
+                  x: 56,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+            ]
+          }
+        })
+
+        graphInstance.addEdge({
+          id: 'axi4vga1',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'AXI4-VGA-port1' },
+          target: { cell: image4Node, port: 'image4-port1' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          id: 'axi4vga2',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'AXI4-VGA-port2' },
+          target: { cell: image4Node, port: 'image4-port2' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          id: 'axi4vga3',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'AXI4-VGA-port3' },
+          target: { cell: image4Node, port: 'image4-port3' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          id: 'axi4vga4',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'AXI4-VGA-port4' },
+          target: { cell: image4Node, port: 'image4-port4' },
+          router: 'orth'
+        })
+
+        const image5Node = graphInstance.addNode({
+          id: 'image5-node',
+          x: 150,
+          y: 770,
+          shape: 'image-node',
+          component:
+            <Log
+              program={program}
+              hasbug={hasBug}
+              cycle={cycle}
+              needInterval={{ maxCycle, setCycle }}
+            />,
+          ports: {
+            items: [
+              {
+                id: "image5-port1",
+                group: 'port',
+                args: {
+                  x: 41,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image5-port2",
+                group: 'port',
+                args: {
+                  x: 46,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image5-port3",
+                group: 'port',
+                args: {
+                  x: 51,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image5-port4",
+                group: 'port',
+                args: {
+                  x: 56,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+            ]
+          }
+        })
+
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port1' },
+          target: { cell: 'image5-node', port: 'image5-port1' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port2' },
+          target: { cell: 'image5-node', port: 'image5-port2' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port3' },
+          target: { cell: 'image5-node', port: 'image5-port3' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port4' },
+          target: { cell: 'image5-node', port: 'image5-port4' },
+          router: 'orth'
+        })
+      }
+
+      if (graphInstance && currentDisplayCodeNode) {
+        graphInstance.removeNode(currentDisplayCodeNode + '-code')
+        graphInstance.addNode({
+          id: currentDisplayCodeNode + '-code',
+          x: 900,
+          y: 50,
+          shape: 'react-shape',
+          component:
+            <Code
+              id={currentDisplayCodeNode}
+              cycle={cycle}
+              needInterval={{ maxCycle, setCycle }}
+            />
+        })
+      }
+      setAddInterval(false)
+    }
+
+  }, [addInterval])
 
   const handleNodeDoubleClick = (id) => {
     console.log(id)
@@ -1144,23 +1361,24 @@ export default function Cpu() {
         <Col span={1}>
           {isStart ?
             <Button type="primary" shape="circle" icon={<PauseCircleOutlined />}
-              disabled={cycle === maxCycle ? true : false}
+              disabled={(cycle !== maxCycle)&&!isStart ? false : true}
               onClick={() => {
                 setIsStart(false)
-                clearInterval(intervalInstance)
-                setIntervalInstance(null)
+                // clearInterval(intervalInstance)
+                // setIntervalInstance(null)
               }}
             /> :
             <Button type="primary" shape="circle" icon={<PlayCircleOutlined />}
-              disabled={cycle === maxCycle ? true : false}
+              disabled={(cycle !== maxCycle)&&!isStart ? false : true}
               onClick={() => {
                 setIsStart(true)
-                let step = Math.floor(maxCycle / 100)
-                setIntervalInstance(
-                  setInterval(() => {
-                    setCycle(prev => prev + step)
-                  }, 1000)
-                )
+                setAddInterval(true)
+                // let step = Math.floor(maxCycle / 100)
+                // setIntervalInstance(
+                //   setInterval(() => {
+                //     setCycle(prev => prev + step)
+                //   }, 1000)
+                // )
               }}
             />
           }

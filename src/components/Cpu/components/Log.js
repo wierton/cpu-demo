@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { SPEED } from "../../../config/config";
 
 const display = (s) => {
   if (s === "\\r") {
@@ -28,11 +29,12 @@ const printLog = (log, cycle) => {
 }
 
 
-export default function Log({ program, hasbug, cycle = 100 }) {
+export default function Log({ program, hasbug, cycle, needInterval }) {
   const [log, setLog] = useState([])
   const [count, setCount] = useState(0)
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
-  const [displayLog,setDisplayLog]=useState(null)
+  const [displayLog, setDisplayLog] = useState(null)
+  const [currentCycle, setCurrentCycle] = useState(cycle)
   useEffect(() => {
     fetch(`./programs/${program ? program : 'linux'}/${hasbug ? 'with_bug' : 'without_bug'}/serial.txt`)
       .then(r => r.text())
@@ -54,18 +56,49 @@ export default function Log({ program, hasbug, cycle = 100 }) {
       });
   }, [])
 
-  useEffect(()=>{
-    if(log.length>0){
-      setDisplayLog(printLog(log, parseInt(cycle)))
-    }
-  },[log])
+  useEffect(() => {
+    let timer
+    if (needInterval) {
+      let totalTime = SPEED.TotalTime
+      let interval = SPEED.Interval
+      const { maxCycle, setCycle } = needInterval;
+      let step = Math.ceil(maxCycle / Math.ceil((1000 / interval) * 10))
+      timer = setInterval(() => {
+        setCurrentCycle(prev => {
+          let res = prev + step
+          if (res >= maxCycle) {
+            res = maxCycle
+            clearInterval(timer)
+          }
+          return res
+        })
+      }, interval)
 
-  useEffect(()=>{
-    if(displayLog){
-      const d=document.getElementById('scrolldiv')
-      d.scrollTop = d.scrollHeight;
     }
-  },[displayLog])
+  }, [])
+
+  // useEffect(() => {
+  //   if (needInterval) {
+  //     const { setCycle } = needInterval
+  //     setCycle(currentCycle)
+  //   }
+  // }, [currentCycle])
+  useEffect(() => {
+    if (currentCycle >= 0 && log.length > 0) {
+      setDisplayLog(printLog(log, parseInt(currentCycle)))
+    }
+  }, [log, currentCycle])
+
+  // useEffect(() => {
+  //   if (displayLog) {
+  //     const d = document.getElementById('scrolldiv')
+  //     const h = d.scrollHeight
+  //     console.log(h, typeof h)
+  //     if (typeof h !== undefined || typeof h !== null) {
+  //       d.scrollTop = h;
+  //     }
+  //   }
+  // }, [displayLog])
   // useEffect(() => {
   //   if (log.length > 0) {
   //     const interval = setInterval(() => {

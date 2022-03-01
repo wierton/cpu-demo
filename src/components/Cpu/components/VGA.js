@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SPEED } from "../../../config/config";
 
 const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle) => {
   let closedDistance = Infinity;
@@ -67,9 +68,11 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle) => {
   }
   return res
 }
-export default function VGA({ program, hasbug, cycle, changeStyle, removeErrorCircle }) {
+export default function VGA({ program, hasbug, cycle, changeStyle, removeErrorCircle,needInterval }) {
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
   const [VGALog, setVGALog] = useState([])
+  const [currentCycle,setCurrentCycle]=useState(cycle)
+  const [displayLog,setDisplayLog]=useState(null)
 
   useEffect(() => {
     fetch(`./programs/${program ? program : 'linux'}/${hasbug ? 'with_bug' : 'without_bug'}/registers.txt`)
@@ -97,6 +100,35 @@ export default function VGA({ program, hasbug, cycle, changeStyle, removeErrorCi
         setVGALog(registersArray)
       });
   }, [])
+
+  useEffect(() => {
+    let timer
+    if (needInterval) {
+      let totalTime = SPEED.TotalTime
+      let interval = SPEED.Interval
+      const { maxCycle, setCycle,setIsStart } = needInterval;
+      let step = Math.ceil(maxCycle / Math.ceil((1000 / interval) * 10))
+      timer = setInterval(() => {
+        setCurrentCycle(prev => {
+          let res = prev + step
+          if (res >= maxCycle) {
+            res = maxCycle
+            clearInterval(timer)
+            setIsStart(false)
+          }
+          return res
+        })
+      }, interval)
+
+    }
+  }, [])
+
+  useEffect(() => {
+    if (needInterval) {
+      const { setCycle } = needInterval
+      setCycle(currentCycle)
+    }
+  }, [currentCycle])
 
 
   return (
@@ -139,10 +171,10 @@ export default function VGA({ program, hasbug, cycle, changeStyle, removeErrorCi
         padding: '5px',
       }}>
         <div style={{ width: '50%', boxSizing: 'border-box', float: 'left' }}>
-          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'cpu', changeStyle, removeErrorCircle) : null}
+          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(currentCycle), 'cpu', changeStyle, removeErrorCircle) : null}
         </div>
         <div style={{ width: '50%', boxSizing: 'border-box', float: 'left' }}>
-          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(cycle), 'simulator', changeStyle, removeErrorCircle) : null}
+          {VGALog.length > 0 ? printVGALog(VGALog, parseInt(currentCycle), 'simulator', changeStyle, removeErrorCircle) : null}
         </div>
         {/* {VGALog.length>0?printVGALog(VGALog,parseInt(cycle)):null} */}
       </div>

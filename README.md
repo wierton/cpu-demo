@@ -22,3 +22,6 @@ VGA为/src/resource/VGA.txt
 
 ### log
 log为/src/resource/sample-serial.txt  
+
+### 配置滑动条速度
+在/src/config/config.js下设置
