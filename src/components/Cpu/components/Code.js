@@ -44,7 +44,8 @@ export default function Code({
   id,
   cycle,
   program,
-  hasbug
+  hasbug,
+  hasDiff,
 }) {
   const [rows, setRows] = useState([])
   const [variableStatus, setVariableStatus] = useState(null)
@@ -60,7 +61,7 @@ export default function Code({
         });
     }
 
-    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? 'with_bug' : 'without_bug'}/signals.txt`)
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/signals.txt`)
       .then(r => r.text())
       .then(text => {
         const signals = text.split('\n')

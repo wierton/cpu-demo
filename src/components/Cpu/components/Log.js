@@ -29,14 +29,17 @@ const printLog = (log, cycle) => {
 }
 
 
-export default function Log({ program, hasbug, cycle, needInterval }) {
+export default function Log({ program, hasbug, hasDiff, cycle, needInterval }) {
   const [log, setLog] = useState([])
   const [count, setCount] = useState(0)
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
   const [displayLog, setDisplayLog] = useState(null)
   const [currentCycle, setCurrentCycle] = useState(cycle)
+  const [speed, setSpeed] = useState(null)
+  const [intervalInstance, setIntervalInstance] = useState(null)
+
   useEffect(() => {
-    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? 'with_bug' : 'without_bug'}/serial.txt`)
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop_serial.txt`)
       .then(r => r.text())
       .then(text => {
         const logs = text.split('\n');
@@ -54,28 +57,47 @@ export default function Log({ program, hasbug, cycle, needInterval }) {
         }
         setLog(logarray)
       });
+
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/config.json`)
+      .then(res => res.json())
+      .then(res => {
+        setSpeed(res)
+      })
   }, [])
 
   useEffect(() => {
-    let timer
-    if (needInterval) {
-      let totalTime = SPEED.TotalTime
-      let interval = SPEED.Interval
-      const { maxCycle, setCycle } = needInterval;
-      let step = Math.ceil(maxCycle / Math.ceil((1000 / interval) * totalTime))
-      timer = setInterval(() => {
-        setCurrentCycle(prev => {
-          let res = prev + step
-          if (res >= maxCycle) {
-            res = maxCycle
-            clearInterval(timer)
-          }
-          return res
-        })
-      }, interval)
+    if (speed) {
+      let timer
+      if (needInterval) {
+        let totalTime = speed.TotalTime
+        let interval = speed.Interval
+        const { maxCycle, setCycle } = needInterval;
+        let step = Math.ceil(maxCycle / Math.ceil((1000 / interval) * totalTime))
+        setIntervalInstance(setInterval(() => {
+          setCurrentCycle(prev => {
+            let res = prev + step
+            if (res >= maxCycle) {
+              res = maxCycle
+            }
+            return res
+          })
+        }, interval))
+
+      }
 
     }
-  }, [])
+    return () => {
+      clearInterval(intervalInstance)
+    }
+  }, [speed])
+
+  useEffect(() => {
+    if (needInterval) {
+      if (currentCycle === needInterval.maxCycle) {
+        clearInterval(intervalInstance)
+      }
+    }
+  }, [currentCycle])
 
   // useEffect(() => {
   //   if (needInterval) {
@@ -89,16 +111,14 @@ export default function Log({ program, hasbug, cycle, needInterval }) {
     }
   }, [log, currentCycle])
 
-  // useEffect(() => {
-  //   if (displayLog) {
-  //     const d = document.getElementById('scrolldiv')
-  //     const h = d.scrollHeight
-  //     console.log(h, typeof h)
-  //     if (typeof h !== undefined || typeof h !== null) {
-  //       d.scrollTop = h;
-  //     }
-  //   }
-  // }, [displayLog])
+  useEffect(() => {
+    if (displayLog) {
+      const d = document.getElementById('scrolldiv')
+      if (d) {
+        d.scrollTop = d.scrollHeight;
+      }
+    }
+  }, [displayLog])
   // useEffect(() => {
   //   if (log.length > 0) {
   //     const interval = setInterval(() => {
