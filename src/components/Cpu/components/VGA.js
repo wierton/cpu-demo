@@ -107,7 +107,7 @@ export default function VGA({ program, hasbug, cycle, changeStyle, removeErrorCi
       let totalTime = SPEED.TotalTime
       let interval = SPEED.Interval
       const { maxCycle, setCycle,setIsStart } = needInterval;
-      let step = Math.ceil(maxCycle / Math.ceil((1000 / interval) * 10))
+      let step = Math.ceil(maxCycle / Math.ceil((1000 / interval) * totalTime))
       timer = setInterval(() => {
         setCurrentCycle(prev => {
           let res = prev + step
