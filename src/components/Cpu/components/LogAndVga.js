@@ -13,7 +13,7 @@ const header = [
   "gp", "sp", "fp", "ra",
 ]
 
-const printVGALog = (log, cycle, type,setError, header) => {
+const printVGALog = (log, cycle, type, setError, header) => {
   let closedDistance = Infinity;
   let closedCycleIndex = 0;
   log.forEach((l, index) => {
@@ -33,7 +33,7 @@ const printVGALog = (log, cycle, type,setError, header) => {
   ]
   let hasErrorflag = false
 
-  let { cpuValue, simulatorValue } = log[closedCycleIndex]
+  let { cpuValue, simulatorValue, cycle:errorcycle } = log[closedCycleIndex]
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
@@ -56,7 +56,6 @@ const printVGALog = (log, cycle, type,setError, header) => {
       )
     } else {
       hasErrorflag = true
-      setError({ cycle:log[closedCycleIndex].cycle })
       res.push(
         <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
           <th style={{ width: "20%" }}>{header[j]}</th>
@@ -66,6 +65,12 @@ const printVGALog = (log, cycle, type,setError, header) => {
       )
     }
   }
+
+  if (hasErrorflag) {
+    // console.log(errorcycle)
+    setError({ cycle: errorcycle })
+  }
+
   return (
     <table style={{ width: "100%" }}>
       {res}
@@ -111,10 +116,10 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
   const [VGALog, setVGALog] = useState('')
   const [displayVGALog, setDisplayVGALog] = useState(null)
 
-  const [error,setError]=useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/nemu_serial.txt`)
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/nemu-serial.txt`)
       .then(r => r.text())
       .then(text => {
         const logs = text.split('\n');
@@ -216,19 +221,19 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
 
   useEffect(() => {
     if (currentCycle >= 0 && VGALog.length > 0) {
-      setDisplayVGALog(printVGALog(VGALog, parseInt(currentCycle), 'simulator',setError,
+      setDisplayVGALog(printVGALog(VGALog, parseInt(currentCycle), 'simulator', setError,
         header.map(value => {
           return "$" + value
         })))
     }
   }, [VGALog, currentCycle])
 
-  useEffect(()=>{
-    if(error){
+  useEffect(() => {
+    if (error) {
       clearInterval(logIntervalInstance)
       setCurrentCycle(error.cycle)
     }
-  },[error])
+  }, [error])
 
 
   return (

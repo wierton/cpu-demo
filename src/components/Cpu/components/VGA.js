@@ -11,7 +11,8 @@ const header = [
   "gp", "sp", "fp", "ra",
 ]
 
-const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle,setError, header ) => {
+const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError, header) => {
+  // console.log(log)
   let closedDistance = Infinity;
   let closedCycleIndex = 0;
   log.forEach((l, index) => {
@@ -21,7 +22,7 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle,setError, 
       closedCycleIndex = index
     }
   })
-
+  // console.log(closedCycleIndex)
   let res = [
     <tr style={{ borderBottom: "1px solid black" }}>
       <th style={{ width: "30%" }}></th>
@@ -31,7 +32,7 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle,setError, 
   ]
   let hasErrorflag = false
 
-  let { cpuValue, simulatorValue } = log[closedCycleIndex]
+  let { cpuValue, simulatorValue, cycle: errorcycle } = log[closedCycleIndex]
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
@@ -42,9 +43,11 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle,setError, 
   const cpuLen = cpuValues.length;
   const simulatorLen = simulatorValues.length;
   const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
-
+  // console.log(cpuValues,simulatorValues,min)
   for (let j = 0; j < min; j++) {
+    // console.log(j)
     if (cpuValues[j] === simulatorValues[j]) {
+      // res.push({header:header[j],isEqual:true,value:cpuValues[j]})
       res.push(
         <tr style={{ borderBottom: "1px solid black" }}>
           <th style={{ width: "20%" }}>{header[j]}</th>
@@ -53,9 +56,8 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle,setError, 
         </tr>
       )
     } else {
-      changeStyle()
       hasErrorflag = true
-      setError({ cycle:log[closedCycleIndex].cycle })
+      // res.push({header:header[j],isEqual:false,value:cpuValues[j]})
       res.push(
         <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
           <th style={{ width: "20%" }}>{header[j]}</th>
@@ -68,7 +70,12 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle,setError, 
 
   if (!hasErrorflag) {
     removeErrorCircle()
+  } else {
+    // console.log(errorcycle,log[closedCycleIndex])
+    changeStyle()
+    setError({ cycle: errorcycle })
   }
+  // console.log(res)
   return (
     <table style={{ width: "100%" }}>
       {res}
@@ -152,7 +159,7 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
   const [VGAIntervalInstance, setVGAIntervalInstance] = useState(null)
   const [displayVGALog, setDisplayVGALog] = useState(null)
 
-  const [error,setError]=useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/registers.txt`)
@@ -224,7 +231,7 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
 
   useEffect(() => {
     if (currentCycle >= 0 && VGALog.length > 0) {
-      setDisplayVGALog(printVGALog(VGALog, parseInt(currentCycle), 'cpu', changeStyle, removeErrorCircle,setError,
+      setDisplayVGALog(printVGALog(VGALog, parseInt(currentCycle), 'cpu', changeStyle, removeErrorCircle, setError,
         header.map(value => {
           return "$" + value
         })),
@@ -232,13 +239,17 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
     }
 
   }, [VGALog, currentCycle])
-   
-  useEffect(()=>{
-    if(error){
+
+  useEffect(() => {
+    if (error) {
       clearInterval(VGAIntervalInstance)
       setCurrentCycle(error.cycle)
+      if (needInterval) {
+        const { setIsStart } = needInterval
+        setIsStart(false)
+      }
     }
-  },[error])
+  }, [error])
 
   return (
     <div

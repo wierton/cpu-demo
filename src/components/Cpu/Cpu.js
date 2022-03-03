@@ -919,7 +919,7 @@ export default function Cpu() {
         router: 'orth'
       })
 
-   
+
 
       const image5Node = graphInstance.addNode({
         id: 'image5-node',
@@ -1128,7 +1128,7 @@ export default function Cpu() {
         target: { cell: image4Node, port: 'image4-port5' },
         // router: 'orth',
         vertices: [
-          { x: 1251, y: 1002 }, 
+          { x: 1251, y: 1002 },
         ],
       })
       graphInstance.addEdge({
@@ -1138,7 +1138,7 @@ export default function Cpu() {
         target: { cell: image4Node, port: 'image4-port6' },
         // router: 'orth'
         vertices: [
-          { x: 1256, y: 1007 }, 
+          { x: 1256, y: 1007 },
         ],
       })
       graphInstance.addEdge({
@@ -1148,7 +1148,7 @@ export default function Cpu() {
         target: { cell: image4Node, port: 'image4-port7' },
         // router: 'orth'
         vertices: [
-          { x: 1261, y: 1012 }, 
+          { x: 1261, y: 1012 },
         ],
       })
       graphInstance.addEdge({
@@ -1158,7 +1158,7 @@ export default function Cpu() {
         target: { cell: image4Node, port: 'image4-port8' },
         // router: 'orth',
         vertices: [
-          { x: 1266, y: 1017 }, 
+          { x: 1266, y: 1017 },
         ],
       })
 
@@ -1205,106 +1205,106 @@ export default function Cpu() {
               removeErrorCircle={removeErrorCircle}
               needInterval={{ maxCycle, setCycle, setIsStart }}
             />,
-            ports: {
-              items: [
-                {
-                  id: "image4-port1",
-                  group: 'port',
-                  args: {
-                    x: 141,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+          ports: {
+            items: [
+              {
+                id: "image4-port1",
+                group: 'port',
+                args: {
+                  x: 141,
+                  y: -5,
                 },
-                {
-                  id: "image4-port2",
-                  group: 'port',
-                  args: {
-                    x: 146,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-                {
-                  id: "image4-port3",
-                  group: 'port',
-                  args: {
-                    x: 151,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+              },
+              {
+                id: "image4-port2",
+                group: 'port',
+                args: {
+                  x: 146,
+                  y: -5,
                 },
-                {
-                  id: "image4-port4",
-                  group: 'port',
-                  args: {
-                    x: 156,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-                {
-                  id: "image4-port5",
-                  group: 'port',
-                  args: {
-                    x: 303,
-                    y: 150,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+              },
+              {
+                id: "image4-port3",
+                group: 'port',
+                args: {
+                  x: 151,
+                  y: -5,
                 },
-                {
-                  id: "image4-port6",
-                  group: 'port',
-                  args: {
-                    x: 303,
-                    y: 155,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-                {
-                  id: "image4-port7",
-                  group: 'port',
-                  args: {
-                    x: 303,
-                    y: 160,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+              },
+              {
+                id: "image4-port4",
+                group: 'port',
+                args: {
+                  x: 156,
+                  y: -5,
                 },
-                {
-                  id: "image4-port8",
-                  group: 'port',
-                  args: {
-                    x: 303,
-                    y: 165,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-              ]
-            }
+              },
+              {
+                id: "image4-port5",
+                group: 'port',
+                args: {
+                  x: 303,
+                  y: 150,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port6",
+                group: 'port',
+                args: {
+                  x: 303,
+                  y: 155,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port7",
+                group: 'port',
+                args: {
+                  x: 303,
+                  y: 160,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port8",
+                group: 'port',
+                args: {
+                  x: 303,
+                  y: 165,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+            ]
+          }
         })
 
         graphInstance.addEdge({
@@ -1441,106 +1441,106 @@ export default function Cpu() {
               cycle={cycle}
               needInterval={{ maxCycle, setCycle }}
             />,
-            ports: {
-              items: [
-                {
-                  id: "image6-port1",
-                  group: 'port',
-                  args: {
-                    x: 91,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+          ports: {
+            items: [
+              {
+                id: "image6-port1",
+                group: 'port',
+                args: {
+                  x: 91,
+                  y: -5,
                 },
-                {
-                  id: "image6-port2",
-                  group: 'port',
-                  args: {
-                    x: 96,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-                {
-                  id: "image6-port3",
-                  group: 'port',
-                  args: {
-                    x: 101,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+              },
+              {
+                id: "image6-port2",
+                group: 'port',
+                args: {
+                  x: 96,
+                  y: -5,
                 },
-                {
-                  id: "image6-port4",
-                  group: 'port',
-                  args: {
-                    x: 106,
-                    y: -5,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-                {
-                  id: "image6-port5",
-                  group: 'port',
-                  args: {
-                    x: 440,
-                    y: 277,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+              },
+              {
+                id: "image6-port3",
+                group: 'port',
+                args: {
+                  x: 101,
+                  y: -5,
                 },
-                {
-                  id: "image6-port6",
-                  group: 'port',
-                  args: {
-                    x: 445,
-                    y: 277,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-                {
-                  id: "image6-port7",
-                  group: 'port',
-                  args: {
-                    x: 450,
-                    y: 277,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+              },
+              {
+                id: "image6-port4",
+                group: 'port',
+                args: {
+                  x: 106,
+                  y: -5,
                 },
-                {
-                  id: "image6-port8",
-                  group: 'port',
-                  args: {
-                    x: 455,
-                    y: 277,
-                  },
-                  size: {
-                    width: 3,
-                    height: 3,
-                  },
+                size: {
+                  width: 3,
+                  height: 3,
                 },
-              ]
-            }
+              },
+              {
+                id: "image6-port5",
+                group: 'port',
+                args: {
+                  x: 440,
+                  y: 277,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image6-port6",
+                group: 'port',
+                args: {
+                  x: 445,
+                  y: 277,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image6-port7",
+                group: 'port',
+                args: {
+                  x: 450,
+                  y: 277,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image6-port8",
+                group: 'port',
+                args: {
+                  x: 455,
+                  y: 277,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+            ]
+          }
         })
 
         graphInstance.addEdge({
@@ -1550,7 +1550,7 @@ export default function Cpu() {
           target: { cell: image4Node, port: 'image4-port5' },
           // router: 'orth',
           vertices: [
-            { x: 1251, y: 1002 }, 
+            { x: 1251, y: 1002 },
           ],
         })
         graphInstance.addEdge({
@@ -1560,7 +1560,7 @@ export default function Cpu() {
           target: { cell: image4Node, port: 'image4-port6' },
           // router: 'orth'
           vertices: [
-            { x: 1256, y: 1007 }, 
+            { x: 1256, y: 1007 },
           ],
         })
         graphInstance.addEdge({
@@ -1570,7 +1570,7 @@ export default function Cpu() {
           target: { cell: image4Node, port: 'image4-port7' },
           // router: 'orth'
           vertices: [
-            { x: 1261, y: 1012 }, 
+            { x: 1261, y: 1012 },
           ],
         })
         graphInstance.addEdge({
@@ -1580,10 +1580,10 @@ export default function Cpu() {
           target: { cell: image4Node, port: 'image4-port8' },
           // router: 'orth',
           vertices: [
-            { x: 1266, y: 1017 }, 
+            { x: 1266, y: 1017 },
           ],
         })
-        
+
       }
       setAddInterval(false)
     }
@@ -1656,7 +1656,7 @@ export default function Cpu() {
       target: { cell: 'image4-node', port: 'image4-port5' },
       // router: 'orth',
       vertices: [
-        { x: 1251, y: 1002 }, 
+        { x: 1251, y: 1002 },
       ],
     })
     graphInstance.addEdge({
@@ -1666,7 +1666,7 @@ export default function Cpu() {
       target: { cell: 'image4-node', port: 'image4-port6' },
       // router: 'orth'
       vertices: [
-        { x: 1256, y: 1007 }, 
+        { x: 1256, y: 1007 },
       ],
     })
     graphInstance.addEdge({
@@ -1676,7 +1676,7 @@ export default function Cpu() {
       target: { cell: 'image4-node', port: 'image4-port7' },
       // router: 'orth'
       vertices: [
-        { x: 1261, y: 1012 }, 
+        { x: 1261, y: 1012 },
       ],
     })
     graphInstance.addEdge({
@@ -1686,7 +1686,7 @@ export default function Cpu() {
       target: { cell: 'image4-node', port: 'image4-port8' },
       // router: 'orth',
       vertices: [
-        { x: 1266, y: 1017 }, 
+        { x: 1266, y: 1017 },
       ],
     })
 
@@ -1812,8 +1812,43 @@ export default function Cpu() {
             onChange={(value) => {
               setProgram(value);
             }}>
+            <Select.Option value="add">add</Select.Option>
+            <Select.Option value="add-longlong">add-longlong</Select.Option>
+            <Select.Option value="bit">bit</Select.Option>
+            <Select.Option value="bubble-sort">bubble-sort</Select.Option>
+            <Select.Option value="cache-flush">cache-flush</Select.Option>
+            <Select.Option value="div">div</Select.Option>
+            <Select.Option value="dummy">dummy</Select.Option>
+            <Select.Option value="fact">fact</Select.Option>
+            <Select.Option value="fib">fib</Select.Option>
+            <Select.Option value="goldbach">goldbach</Select.Option>
+            <Select.Option value="hello-str">hello-str</Select.Option>
+            <Select.Option value="if-else">if-else</Select.Option>
+            <Select.Option value="leap-year">leap-year</Select.Option>
             <Select.Option value="linux">linux</Select.Option>
+            <Select.Option value="load-store">load-store</Select.Option>
+            <Select.Option value="matrix-mul">matrix-mul</Select.Option>
+            <Select.Option value="max">max</Select.Option>
             <Select.Option value="microbench">microbench</Select.Option>
+            <Select.Option value="min3">min3</Select.Option>
+            <Select.Option value="mov-c">mov-c</Select.Option>
+            <Select.Option value="movsx">movsx</Select.Option>
+            <Select.Option value="mul-longlong">mul-longlong</Select.Option>
+            <Select.Option value="pascal">pascal</Select.Option>
+            <Select.Option value="prime">prime</Select.Option>
+            <Select.Option value="quick-sort">quick-sort</Select.Option>
+            <Select.Option value="recursion">recursion</Select.Option>
+            <Select.Option value="select-sort">select-sort</Select.Option>
+            <Select.Option value="shift">shift</Select.Option>
+            <Select.Option value="shuixianhua">shuixianhua</Select.Option>
+            <Select.Option value="SimpleOS">SimpleOS</Select.Option>
+            <Select.Option value="string">string</Select.Option>
+            <Select.Option value="sub-longlong">sub-longlong</Select.Option>
+            <Select.Option value="sum">sum</Select.Option>
+            <Select.Option value="switch">switch</Select.Option>
+            <Select.Option value="to-lower-case">to-lower-case</Select.Option>
+            <Select.Option value="unalign">unalign</Select.Option>
+            <Select.Option value="wanshu">wanshu</Select.Option>
           </Select>
         </Col>
       </Row>

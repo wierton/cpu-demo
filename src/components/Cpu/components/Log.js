@@ -39,7 +39,7 @@ export default function Log({ program, hasbug, hasDiff, cycle, needInterval }) {
   const [intervalInstance, setIntervalInstance] = useState(null)
 
   useEffect(() => {
-    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop_serial.txt`)
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop-serial.txt`)
       .then(r => r.text())
       .then(text => {
         const logs = text.split('\n');

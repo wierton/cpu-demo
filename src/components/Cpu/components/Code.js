@@ -61,7 +61,7 @@ export default function Code({
         });
     }
 
-    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/signals.txt`)
+    fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop-signals.txt`)
       .then(r => r.text())
       .then(text => {
         const signals = text.split('\n')
