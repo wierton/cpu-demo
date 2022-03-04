@@ -33,7 +33,7 @@ const printVGALog = (log, cycle, type, setError, header) => {
   ]
   let hasErrorflag = false
 
-  let { cpuValue, simulatorValue, cycle:errorcycle } = log[closedCycleIndex]
+  let { cpuValue, simulatorValue, cycle: errorcycle } = log[closedCycleIndex]
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
@@ -220,20 +220,20 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
   }, [currentCycle])
 
   useEffect(() => {
-    if (currentCycle >= 0 && VGALog.length > 0) {
+    if (currentCycle >= 0 && VGALog.length > 0 && !error) {
       setDisplayVGALog(printVGALog(VGALog, parseInt(currentCycle), 'simulator', setError,
         header.map(value => {
           return "$" + value
         })))
     }
-  }, [VGALog, currentCycle])
+  }, [VGALog, currentCycle, error])
 
-  useEffect(() => {
-    if (error) {
-      clearInterval(logIntervalInstance)
-      setCurrentCycle(error.cycle)
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (error) {
+  //     clearInterval(logIntervalInstance)
+  //     setCurrentCycle(error.cycle)
+  //   }
+  // }, [error])
 
 
   return (

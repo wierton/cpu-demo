@@ -220,17 +220,18 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
 
   useEffect(() => {
     if (needInterval) {
-      const { setCycle, maxCycle, setIsStart } = needInterval
+      const { setCycle, maxCycle, setIsStart, setAddInterval } = needInterval
       setCycle(currentCycle)
       if (currentCycle === maxCycle) {
         clearInterval(VGAIntervalInstance)
-        setIsStart(false)
+        // setIsStart(false)
+        setAddInterval(false)
       }
     }
   }, [currentCycle])
 
   useEffect(() => {
-    if (currentCycle >= 0 && VGALog.length > 0) {
+    if (currentCycle >= 0 && VGALog.length > 0 && !error) {
       setDisplayVGALog(printVGALog(VGALog, parseInt(currentCycle), 'cpu', changeStyle, removeErrorCircle, setError,
         header.map(value => {
           return "$" + value
@@ -238,18 +239,18 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
       )
     }
 
-  }, [VGALog, currentCycle])
+  }, [VGALog, currentCycle, error])
 
-  useEffect(() => {
-    if (error) {
-      clearInterval(VGAIntervalInstance)
-      setCurrentCycle(error.cycle)
-      if (needInterval) {
-        const { setIsStart } = needInterval
-        setIsStart(false)
-      }
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (error) {
+  //     clearInterval(VGAIntervalInstance)
+  //     setCurrentCycle(error.cycle)
+  //     if (needInterval) {
+  //       const { setIsStart } = needInterval
+  //       setIsStart(false)
+  //     }
+  //   }
+  // }, [error])
 
   return (
     <div

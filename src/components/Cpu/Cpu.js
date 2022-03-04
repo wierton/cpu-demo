@@ -1203,7 +1203,7 @@ export default function Cpu() {
               cycle={cycle}
               changeStyle={changeStyle}
               removeErrorCircle={removeErrorCircle}
-              needInterval={{ maxCycle, setCycle, setIsStart }}
+              needInterval={{ maxCycle, setCycle, setIsStart, setAddInterval }}
             />,
           ports: {
             items: [
@@ -1585,10 +1585,16 @@ export default function Cpu() {
         })
 
       }
-      setAddInterval(false)
     }
 
-  }, [addInterval])
+  }, [addInterval, setAddInterval])
+
+  useEffect(()=>{
+    if(cycle!==maxCycle&&!addInterval){
+      setIsStart(false)
+    }
+  },[cycle])
+
 
   const handleNodeDoubleClick = (id) => {
     console.log(id)
@@ -1727,6 +1733,9 @@ export default function Cpu() {
             // onAfterChange={(value) => {
             //   setCycle(value)
             // }}
+            onClick={() => {
+              console.log('sad')
+            }}
             tipFormatter={(value) => {
               return value
             }}
