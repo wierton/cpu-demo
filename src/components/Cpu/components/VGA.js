@@ -32,7 +32,7 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
   ]
   let hasErrorflag = false
 
-  let { cpuValue, simulatorValue, cycle: errorcycle } = log[closedCycleIndex]
+  let { cpuValue, simulatorValue, cycle: errorcycle, isEqual } = log[closedCycleIndex]
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
@@ -42,39 +42,72 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
   simulatorValues = simulatorValues.map(e => e.trim());
   const cpuLen = cpuValues.length;
   const simulatorLen = simulatorValues.length;
-  const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
   // console.log(cpuValues,simulatorValues,min)
-  for (let j = 0; j < min; j++) {
-    // console.log(j)
-    if (cpuValues[j] === simulatorValues[j]) {
-      // res.push({header:header[j],isEqual:true,value:cpuValues[j]})
-      res.push(
-        <tr style={{ borderBottom: "1px solid black" }}>
-          <th style={{ width: "20%" }}>{header[j]}</th>
-          {type === 'cpu' ? <th style={{ width: "40%" }}>{cpuValues[j]}</th> : null}
-          {type === 'simulator' ? <th style={{ width: "40%" }}>{simulatorValues[j]}</th> : null}
-        </tr>
-      )
-    } else {
-      hasErrorflag = true
-      // res.push({header:header[j],isEqual:false,value:cpuValues[j]})
-      res.push(
-        <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
-          <th style={{ width: "20%" }}>{header[j]}</th>
-          {type === 'cpu' ? <th style={{ width: "40%" }}>{cpuValues[j]}</th> : null}
-          {type === 'simulator' ? <th style={{ width: "40%" }}>{simulatorValues[j]}</th> : null}
-        </tr>
-      )
+  // console.log(isEqual,log[closedCycleIndex])
+  if (isEqual) {
+    
+    if (type === 'cpu') {
+      // console.log(type)
+      for (let j = 0; j < cpuLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black" }}>
+            <th style={{ width: "30%" }}>{header[j]}</th>
+            <th style={{ width: "70%" }}>{cpuValues[j]}</th>
+          </tr>
+        )
+      }
+    } else if (type === 'simulator') {
+      for (let j = 0; j < simulatorLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black" }}>
+            <th style={{ width: "30%" }}>{header[j]}</th>
+            <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+          </tr>
+        )
+      }
+    }
+
+  } else {
+    hasErrorflag = true
+    if (type === 'cpu') {
+      for (let j = 0; j < simulatorLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
+            <th style={{ width: "30%" }}>{header[j]}</th>
+            <th style={{ width: "70%" }}></th>
+          </tr>
+        )
+      }
+    } else if (type === 'simulator') {
+      for (let j = 0; j < simulatorLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
+            <th style={{ width: "30%" }}>{header[j]}</th>
+            <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+          </tr>
+        )
+      }
     }
   }
-
   if (!hasErrorflag) {
     removeErrorCircle()
   } else {
-    // console.log(errorcycle,log[closedCycleIndex])
+    // console.log(errorcycle)
     changeStyle()
-    setError({ cycle: errorcycle })
+    setError(prev => {
+      if (prev) {
+        if (prev.cycle < errorcycle) {
+          return prev
+        } else {
+          return { cycle: errorcycle }
+        }
+      } else {
+        return { cycle: errorcycle }
+      }
+
+    })
   }
+  // console.log(res)
   // console.log(res)
   return (
     <table style={{ width: "100%" }}>
@@ -178,7 +211,7 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
             const third = register.indexOf(",", right + 1);
 
             const currentCycle = parseInt(register.slice(0, first).trim());
-            const isEqual = Boolean(register.slice(first + 1, second).trim());
+            const isEqual = register.slice(first + 1, second).trim() === 'true' ? true : false;
             const cpuValue = register.slice(second + 1, third).trim();
             const simulatorValue = register.slice(third + 1).trim();
             registersArray.push({ cycle: currentCycle, isEqual, cpuValue, simulatorValue })
@@ -251,7 +284,7 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
   //     }
   //   }
   // }, [error])
-
+  // console.log(error)
   return (
     <div
       style={{

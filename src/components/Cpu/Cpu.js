@@ -114,7 +114,12 @@ export default function Cpu() {
           y: 50,
           shape: 'react-shape',
           component:
-            <Code id={id} cycle={cycle} />
+            <Code
+              id={id}
+              cycle={cycle}
+              hasDiff={hasDiff}
+              program={program}
+              hasbug={hasBug} />
         })
         setCurrentDisplayCodeNode(id)
       }
@@ -1589,11 +1594,11 @@ export default function Cpu() {
 
   }, [addInterval, setAddInterval])
 
-  useEffect(()=>{
-    if(cycle!==maxCycle&&!addInterval){
+  useEffect(() => {
+    if (cycle !== maxCycle && !addInterval) {
       setIsStart(false)
     }
-  },[cycle])
+  }, [cycle])
 
 
   const handleNodeDoubleClick = (id) => {
@@ -1802,6 +1807,9 @@ export default function Cpu() {
           <Select defaultValue={true} style={{ width: 120 }}
             onChange={(value) => {
               setHasBug(value);
+              if (!addInterval) {
+                setCycle(0)
+              }
             }}>
             <Select.Option value={false}>无bug</Select.Option>
             <Select.Option value={true}>有bug</Select.Option>
@@ -1811,6 +1819,9 @@ export default function Cpu() {
           <Select defaultValue={false} style={{ width: 120 }}
             onChange={(value) => {
               setHasDiff(value);
+              if (!addInterval) {
+                setCycle(0)
+              }
             }}>
             <Select.Option value={false}>无差分</Select.Option>
             <Select.Option value={true}>有差分</Select.Option>
@@ -1820,6 +1831,9 @@ export default function Cpu() {
           <Select defaultValue="linux" style={{ width: 120 }}
             onChange={(value) => {
               setProgram(value);
+              if (!addInterval) {
+                setCycle(0)
+              }
             }}>
             <Select.Option value="add">add</Select.Option>
             <Select.Option value="add-longlong">add-longlong</Select.Option>

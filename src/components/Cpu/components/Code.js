@@ -40,6 +40,10 @@ const traverse = (jsonData, prefix = '') => {
   return res
 }
 
+const findClosed = (signals, cycleNum) => {
+
+}
+
 export default function Code({
   id,
   cycle,
@@ -66,22 +70,38 @@ export default function Code({
       .then(text => {
         const signals = text.split('\n')
         let cycleNum = parseInt(cycle)
-        for (let signal of signals) {
+        // let closedIndex=findClosed(signals,cycleNum)
+        let closedIndex = -1
+        let closedDis = Infinity
+        // console.log(signals)
+        signals.forEach((signal, index) => {
+          // console.log(signal,index)
           const first = signal.indexOf(':')
-          let currentCycle = parseInt(signal.substring(0, first).replace(/[^0-9]/ig, ""))
-          if (cycleNum === currentCycle) {
-            const second = signal.indexOf(':', first + 1)
-            let head = signal.substring(first + 1, second).replace(/\s+/g, "")
-            if (head === id) {
-              let jsonData = signal.substring(second + 1)
-              // console.log(currentCycle, head, JSON.parse(jsonData))
-              const status = traverse(JSON.parse(jsonData))
-              // console.log(status)
-              setVariableStatus(status)
+          const second = signal.indexOf(':', first + 1)
+          let head = signal.substring(first + 1, second).replace(/\s+/g, "")
+          if (head === id) {
+            // console.log(head)
+            let currentCycle = parseInt(signal.substring(0, first).replace(/[^0-9]/ig, ""))
+            if (Math.abs(currentCycle - cycleNum) < closedDis) {
+              closedDis = Math.abs(currentCycle - cycleNum)
+              closedIndex = index
             }
-          } else if (currentCycle > cycleNum) {
-            break
           }
+        })
+        // console.log(program,hasbug,hasDiff)
+        // console.log(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop-signals.txt`)
+        // console.log(cycleNum, closedIndex)
+        if (closedIndex >= 0) {
+          
+          let sig = signals[closedIndex]
+          // console.log(sig)
+          const first = sig.indexOf(':')
+          const second = sig.indexOf(':', first + 1)
+          let jsonData = sig.substring(second + 1)
+          // console.log(currentCycle, head, JSON.parse(jsonData))
+          const status = traverse(JSON.parse(jsonData))
+          // console.log(status)
+          setVariableStatus(status)
 
         }
       })

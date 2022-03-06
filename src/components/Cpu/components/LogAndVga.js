@@ -33,7 +33,7 @@ const printVGALog = (log, cycle, type, setError, header) => {
   ]
   let hasErrorflag = false
 
-  let { cpuValue, simulatorValue, cycle: errorcycle } = log[closedCycleIndex]
+  let { cpuValue, simulatorValue, cycle: errorcycle, isEqual } = log[closedCycleIndex]
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
@@ -45,30 +45,64 @@ const printVGALog = (log, cycle, type, setError, header) => {
   const simulatorLen = simulatorValues.length;
   const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
 
-  for (let j = 0; j < min; j++) {
-    if (cpuValues[j] === simulatorValues[j]) {
-      res.push(
-        <tr style={{ borderBottom: "1px solid black" }}>
-          <th style={{ width: "20%" }}>{header[j]}</th>
-          {type === 'cpu' ? <th style={{ width: "40%" }}>{cpuValues[j]}</th> : null}
-          {type === 'simulator' ? <th style={{ width: "40%" }}>{simulatorValues[j]}</th> : null}
-        </tr>
-      )
-    } else {
-      hasErrorflag = true
-      res.push(
-        <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
-          <th style={{ width: "20%" }}>{header[j]}</th>
-          {type === 'cpu' ? <th style={{ width: "40%" }}>{cpuValues[j]}</th> : null}
-          {type === 'simulator' ? <th style={{ width: "40%" }}>{simulatorValues[j]}</th> : null}
-        </tr>
-      )
+  if (isEqual) {
+    if(type==='cpu'){
+      for (let j = 0; j < cpuLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black" }}>
+            <th style={{ width: "20%" }}>{header[j]}</th>
+            <th style={{ width: "40%" }}>{cpuValues[j]}</th>
+          </tr>
+        )
+      }
+    }else if(type==='simulator'){
+      for (let j = 0; j < simulatorLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black" }}>
+            <th style={{ width: "20%" }}>{header[j]}</th>
+            <th style={{ width: "40%" }}>{simulatorValues[j]}</th>
+          </tr>
+        )
+      }
+    }
+  } else {
+    hasErrorflag = true
+    if(type==='cpu'){
+      for (let j = 0; j < simulatorLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
+            <th style={{ width: "20%" }}>{header[j]}</th>
+          </tr>
+        )
+      }
+    }else if(type==='simulator'){
+      for (let j = 0; j < simulatorLen; j++) {
+        res.push(
+          <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
+            <th style={{ width: "20%" }}>{header[j]}</th>
+            <th style={{ width: "40%" }}>{simulatorValues[j]}</th>
+          </tr>
+        )
+      }
     }
   }
 
+
   if (hasErrorflag) {
     // console.log(errorcycle)
-    setError({ cycle: errorcycle })
+
+    setError(prev => {
+      if (prev) {
+        if(prev.cycle<errorcycle){
+          return prev
+        }else{
+          return { cycle: errorcycle }
+        }
+      } else {
+        return { cycle: errorcycle }
+      }
+
+    })
   }
 
   return (
@@ -154,7 +188,7 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
             const third = register.indexOf(",", right + 1);
 
             const currentCycle = parseInt(register.slice(0, first).trim());
-            const isEqual = Boolean(register.slice(first + 1, second).trim());
+            const isEqual = register.slice(first + 1, second).trim()==='true'?true:false;
             const cpuValue = register.slice(second + 1, third).trim();
             const simulatorValue = register.slice(third + 1).trim();
             registersArray.push({ cycle: currentCycle, isEqual, cpuValue, simulatorValue })
@@ -227,7 +261,7 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
         })))
     }
   }, [VGALog, currentCycle, error])
-
+// console.log(error)
   // useEffect(() => {
   //   if (error) {
   //     clearInterval(logIntervalInstance)
