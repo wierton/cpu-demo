@@ -70,11 +70,11 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
   } else {
     hasErrorflag = true
     if (type === 'cpu') {
-      for (let j = 0; j < simulatorLen; j++) {
+      for (let j = 0; j < cpuLen; j++) {
         res.push(
           <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
             <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}></th>
+            <th style={{ width: "70%" }}>{cpuValues[j]}</th>
           </tr>
         )
       }
