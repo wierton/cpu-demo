@@ -36,7 +36,7 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
-  let cpuValues = cpuValue.split(",");
+  let cpuValues = cpuValue?cpuValue.split(","):[];
   let simulatorValues = simulatorValue.split(",");
   cpuValues = cpuValues.map(e => e.trim());
   simulatorValues = simulatorValues.map(e => e.trim());
@@ -70,22 +70,43 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
   } else {
     hasErrorflag = true
     if (type === 'cpu') {
+      console.log(cpuLen,cpuValues,cpuValue)
       for (let j = 0; j < cpuLen; j++) {
-        res.push(
-          <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
-            <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}>{cpuValues[j]}</th>
-          </tr>
-        )
+        if(simulatorLen>j&&cpuValues[j]!==simulatorValues[j]){
+          res.push(
+            <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
+              <th style={{ width: "30%" }}>{header[j]}</th>
+              <th style={{ width: "70%" }}>{cpuValues[j]}</th>
+            </tr>
+          )
+        }else{
+          res.push(
+            <tr style={{ borderBottom: "1px solid black" }}>
+              <th style={{ width: "30%" }}>{header[j]}</th>
+              <th style={{ width: "70%" }}>{cpuValues[j]}</th>
+            </tr>
+          )
+        }
+        
       }
     } else if (type === 'simulator') {
       for (let j = 0; j < simulatorLen; j++) {
-        res.push(
-          <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
-            <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
-          </tr>
-        )
+        if(cpuLen>j&&simulatorValues[j]!=cpuValues[j]){
+          res.push(
+            <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
+              <th style={{ width: "30%" }}>{header[j]}</th>
+              <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+            </tr>
+          )
+        }else{
+          res.push(
+            <tr style={{ borderBottom: "1px solid black" }}>
+              <th style={{ width: "30%" }}>{header[j]}</th>
+              <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+            </tr>
+          )
+        }
+        
       }
     }
   }
