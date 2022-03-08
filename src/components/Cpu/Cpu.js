@@ -1847,6 +1847,7 @@ export default function Cpu() {
             <Select.Option value="goldbach">goldbach</Select.Option>
             <Select.Option value="hello-str">hello-str</Select.Option>
             <Select.Option value="if-else">if-else</Select.Option>
+            <Select.Option value="icon">icon</Select.Option>
             <Select.Option value="leap-year">leap-year</Select.Option>
             <Select.Option value="linux">linux</Select.Option>
             <Select.Option value="load-store">load-store</Select.Option>

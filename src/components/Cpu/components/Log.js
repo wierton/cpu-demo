@@ -144,10 +144,10 @@ export default function Log({ program, hasbug, hasDiff, cycle, needInterval }) {
         setMouseEnterStyle({})
       }}
     >
-      <div style={{ width: '300px', height: '25px', backgroundColor: '#AAAAAA', borderRadius: '10px 10px 0px 0px', color: 'white', paddingLeft: '15px' }}>menu</div>
+      <div style={{ width: '300px', height: '25px', backgroundColor: '#AAAAAA', borderRadius: '10px 10px 0px 0px', color: 'white', paddingLeft: '15px', fontFamily: "Consolas" }}>menu</div>
       <div
         id="scrolldiv"
-        style={{ width: '300px', height: '300px', overflow: 'auto', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 10px 10px' }}
+        style={{ width: '300px', height: '300px', overflow: 'auto', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 10px 10px', fontFamily: "Consolas" }}
       >
         {/* {count >= 1 && log.length > 0 ? printLog(log, count) : null} */}
         {displayLog}
