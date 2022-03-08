@@ -309,7 +309,7 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
   return (
     <div
       style={{
-        width: '300px',
+        width: '230px',
         ...mouseEnterStyle
       }}
       onMouseEnter={() => {

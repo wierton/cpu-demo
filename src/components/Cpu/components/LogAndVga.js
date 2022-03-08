@@ -25,10 +25,10 @@ const printVGALog = (log, cycle, type, setError, header) => {
   })
 
   let res = [
-    <tr style={{ borderBottom: "1px solid black", fontFamily: "Consolas" }}>
-      <th style={{ width: "30%", fontFamily: "Consolas" }}></th>
-      {type === 'cpu' ? <th style={{ width: "70%", fontFamily: "Consolas" }}>noop</th> : null}
-      {type === 'simulator' ? <th style={{ width: "70%", fontFamily: "Consolas" }}>nemu</th> : null}
+    <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
+      <th style={{ width: "30%", fontFamily: "monospace" }}></th>
+      {type === 'cpu' ? <th style={{ width: "70%", fontFamily: "monospace" }}>noop</th> : null}
+      {type === 'simulator' ? <th style={{ width: "70%", fontFamily: "monospace" }}>nemu</th> : null}
     </tr>
   ]
   let hasErrorflag = false
@@ -49,18 +49,18 @@ const printVGALog = (log, cycle, type, setError, header) => {
     if(type==='cpu'){
       for (let j = 0; j < cpuLen; j++) {
         res.push(
-          <tr style={{ borderBottom: "1px solid black", fontFamily: "Consolas" }}>
-            <th style={{ width: "30%", fontFamily: "Consolas" }}>{header[j]}</th>
-            <th style={{ width: "70%", fontFamily: "Consolas" }}>{cpuValues[j]}</th>
+          <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
+            <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+            <th style={{ width: "70%", fontFamily: "monospace" }}>{cpuValues[j]}</th>
           </tr>
         )
       }
     }else if(type==='simulator'){
       for (let j = 0; j < simulatorLen; j++) {
         res.push(
-          <tr style={{ borderBottom: "1px solid black", fontFamily: "Consolas" }}>
-            <th style={{ width: "30%", fontFamily: "Consolas" }}>{header[j]}</th>
-            <th style={{ width: "70%", fontFamily: "Consolas" }}>{simulatorValues[j]}</th>
+          <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
+            <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+            <th style={{ width: "70%", fontFamily: "monospace" }}>{simulatorValues[j]}</th>
           </tr>
         )
       }
@@ -71,16 +71,16 @@ const printVGALog = (log, cycle, type, setError, header) => {
       for (let j = 0; j < cpuLen; j++) {
         if(simulatorLen>j&&cpuValues[j]!==simulatorValues[j]){
           res.push(
-            <tr style={{ borderBottom: "1px solid black", background: 'red', fontFamily: "Consolas" }}>
-              <th style={{ width: "30%", fontFamily: "Consolas" }}>{header[j]}</th>
-              <th style={{ width: "70%", fontFamily: "Consolas" }}>{cpuValues[j]}</th>
+            <tr style={{ borderBottom: "1px solid black", background: 'red', fontFamily: "monospace" }}>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{cpuValues[j]}</th>
             </tr>
           )
         }else{
           res.push(
-            <tr style={{ borderBottom: "1px solid black", fontFamily: "Consolas" }}>
-              <th style={{ width: "30%", fontFamily: "Consolas" }}>{header[j]}</th>
-              <th style={{ width: "70%", fontFamily: "Consolas" }}>{cpuValues[j]}</th>
+            <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{cpuValues[j]}</th>
             </tr>
           )
         }
@@ -89,16 +89,16 @@ const printVGALog = (log, cycle, type, setError, header) => {
       for (let j = 0; j < simulatorLen; j++) {
         if(cpuLen>j&&simulatorValues[j]!=cpuValues[j]){
           res.push(
-            <tr style={{ borderBottom: "1px solid black", background: 'red', fontFamily: "Consolas" }}>
-              <th style={{ width: "30%", fontFamily: "Consolas" }}>{header[j]}</th>
-              <th style={{ width: "70%", fontFamily: "Consolas" }}>{simulatorValues[j]}</th>
+            <tr style={{ borderBottom: "1px solid black", background: 'red', fontFamily: "monospace" }}>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{simulatorValues[j]}</th>
             </tr>
           )
         }else{
           res.push(
-            <tr style={{ borderBottom: "1px solid black", fontFamily: "Consolas" }}>
-              <th style={{ width: "30%", fontFamily: "Consolas" }}>{header[j]}</th>
-              <th style={{ width: "70%", fontFamily: "Consolas" }}>{simulatorValues[j]}</th>
+            <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{simulatorValues[j]}</th>
             </tr>
           )
         }
@@ -125,7 +125,7 @@ const printVGALog = (log, cycle, type, setError, header) => {
   }
 
   return (
-    <table style={{ width: "100%", fontFamily: "Consolas" }}>
+    <table style={{ width: "100%", fontFamily: "monospace" }}>
       {res}
     </table>
   )
@@ -292,8 +292,8 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
   return (
     <div
       style={{
-        width: '600px',
-        fontFamily: "Consolas",
+        width: '800px',
+        fontFamily: "monospace",
         ...mouseEnterStyle
       }}
       onMouseEnter={() => {
@@ -302,7 +302,7 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
           // border: '2px solid #03e9f4',
           borderRadius: 12,
           boxShadow: '0 0 50px #03e9f4',
-          fontFamily: "Consolas",
+          fontFamily: "monospace",
         })
       }}
       onMouseLeave={() => {
@@ -311,13 +311,13 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
       }}
     >
       <div style={{
-        width: '100%',
+        width: '630px',
         height: '25px',
         backgroundColor: '#F5F5F5',
         borderRadius: '10px 10px 0px 0px',
         color: 'black',
         paddingLeft: '15px',
-        fontFamily: "Consolas",
+        fontFamily: "monospace",
       }}
       >
         menu
@@ -326,20 +326,20 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
         <Col span={12}>
           <div
             id='logandvgascrolldiv'
-            style={{ height: '250px', overflowX: 'scroll', overflowY: 'scroll', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 0px 10px', fontFamily: "Consolas" }}>
+            style={{ width: '400px', height: '250px', lineHeight: '18px', overflowX: 'scroll', overflowY: 'scroll', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 0px 10px', fontFamily: "monospace" }}>
             {displayLog}
           </div>
         </Col>
         <Col span={12}>
           <div style={{
-            width: '100%',
+            width: '230px',
             height: '250px',
             overflow: 'scroll',
             backgroundColor: '#C0C0C0',
             color: 'black',
             borderRadius: '0px 0px 10px 0px',
             padding: '5px',
-            fontFamily: "Consolas",
+            fontFamily: "monospace",
           }}>
             {displayVGALog}
           </div>
