@@ -45,17 +45,25 @@ const traverse = (jsonData, prefix = '') => {
 const decorateCodeMapper = {
   "class\u00a0": 'yellow',
   "abstract\u00a0": 'red',
-  "{":"blue",
-  "}":"blue",
-  "val\u00a0":"green",
-  "import":"maroon",
-  "package":"olive",
-  "\u00a0=\u00a0":"yellow",
-  ":=":"bisque",
-  "->":"red",
-  "(":"cornflowerblue",
-  ")":"cornflowerblue",
-  "when":"orange",
+  "{": "blue",
+  "}": "blue",
+  "val\u00a0": "green",
+  "import": "maroon",
+  "package": "olive",
+  "\u00a0=\u00a0": "yellow",
+  ":=": "bisque",
+  "->": "red",
+  "(": "cornflowerblue",
+  ")": "cornflowerblue",
+  "when": "orange",
+}
+
+const getUTF8Char=(count)=>{
+  let res=""
+  for(let i=0;i<count;i++){
+    res+='\u00a0'
+  }
+  return res
 }
 
 const decorateCode = (str) => {
@@ -66,7 +74,6 @@ const decorateCode = (str) => {
         <span style={{ color: decorateCodeMapper[key] }}>{match}</span>
       ));
   }
-  console.log(replacedText)
   return replacedText
 }
 
@@ -80,6 +87,7 @@ export default function Code({
   const [rows, setRows] = useState([])
   const [variableStatus, setVariableStatus] = useState(null)
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
+  const [errors, setErrors] = useState([])
   useEffect(() => {
     // console.log(id, ' ', cycle)
     if (mapper.hasOwnProperty(id)) {
@@ -89,6 +97,15 @@ export default function Code({
           const codes = text.split('\n')
           setRows(codes)
         });
+
+      fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/config.json`)
+        .then(res => res.json())
+        .then(res => {
+          const { error } = res
+          if (error) {
+            setErrors(error[id])
+          }
+        })
     }
 
     fetch(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop-signals.txt`)
@@ -168,10 +185,18 @@ export default function Code({
         backgroundColor: 'black',
         color: 'white',
         borderRadius: '0px 0px 10px 10px',
-        fontFamily: 'monospace'
+        fontFamily: "Consolas, 'Courier New', monospace"
       }}>
-        {variableStatus && rows ? rows.map(row => {
-          let replacedText = decorateCode(row.replaceAll(' ', '\u00a0\u00a0'));
+        {variableStatus && rows ? rows.map((row, index) => {
+          let spaceCount = 0;
+          for (let s of row) {
+            if (s === " ") {
+              spaceCount++;
+            } else {
+              break;
+            }
+          }
+          let replacedText = decorateCode(row.substring(spaceCount).replace(/ /ig,'\u00a0'));
           let tooltips = []
           for (let s in variableStatus) {
             if (row.includes(s)) {
@@ -185,7 +210,13 @@ export default function Code({
                 style={{ marginBottom: '1px' }}
               >
                 &nbsp;&nbsp;
-                {replacedText}
+                {getUTF8Char(spaceCount)}
+                <span
+                  style={{
+                    textDecoration: errors.includes(index) ? 'red wavy underline' : 'none'
+                  }}>
+                  {replacedText}
+                </span>
                 &nbsp;&nbsp;
               </p>
             )
@@ -207,20 +238,40 @@ export default function Code({
                   destroyTooltipOnHide={true}
                 >
                   &nbsp;&nbsp;
-                  {replacedText}
+                  {getUTF8Char(spaceCount)}
+                  <span
+                    style={{
+                      textDecoration: errors.includes(index) ? 'red wavy underline' : 'none'
+                    }}>
+                    {replacedText}
+                  </span>
                   &nbsp;&nbsp;
                 </Tooltip>
               </p>
             )
           }
-        }) : rows.map(row => {
-          let replacedText = decorateCode(row.replaceAll(' ', '\u00a0\u00a0'));
+        }) : rows.map((row, index) => {
+          let spaceCount = 0;
+          for (let s of row) {
+            if (s === " ") {
+              spaceCount++;
+            } else {
+              break;
+            }
+          }
+          let replacedText = decorateCode(row.substring(spaceCount).replace(/ /ig,'\u00a0'));
           return (
             <p
               style={{ marginBottom: '1px' }}
             >
               &nbsp;&nbsp;
-              {replacedText}
+              {getUTF8Char(spaceCount)}
+              <span
+                style={{
+                  textDecoration: errors.includes(index) ? 'red wavy underline' : 'none'
+                }}>
+                {replacedText}
+              </span>
               &nbsp;&nbsp;
             </p>
           )
