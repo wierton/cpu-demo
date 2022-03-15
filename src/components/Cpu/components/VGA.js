@@ -64,8 +64,8 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
       for (let j = 0; j < cpuLen; j++) {
         res.push(
           <tr style={{ borderBottom: "1px solid black" }}>
-            <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}>{getFull(cpuValues[j])}</th>
+            <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+            <th style={{ width: "70%", fontFamily: "monospace" }}>{getFull(cpuValues[j])}</th>
           </tr>
         )
       }
@@ -73,8 +73,8 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
       for (let j = 0; j < simulatorLen; j++) {
         res.push(
           <tr style={{ borderBottom: "1px solid black" }}>
-            <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}>{getFull(simulatorValues[j])}</th>
+            <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+            <th style={{ width: "70%", fontFamily: "monospace" }}>{getFull(simulatorValues[j])}</th>
           </tr>
         )
       }
@@ -88,15 +88,15 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
         if(simulatorLen>j&&cpuValues[j]!==simulatorValues[j]){
           res.push(
             <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
-              <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{getFull(cpuValues[j])}</th>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{getFull(cpuValues[j])}</th>
             </tr>
           )
         }else{
           res.push(
             <tr style={{ borderBottom: "1px solid black" }}>
-              <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{getFull(cpuValues[j])}</th>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{getFull(cpuValues[j])}</th>
             </tr>
           )
         }
@@ -107,15 +107,15 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
         if(cpuLen>j&&simulatorValues[j]!=cpuValues[j]){
           res.push(
             <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
-              <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{getFull(simulatorValues[j])}</th>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{getFull(simulatorValues[j])}</th>
             </tr>
           )
         }else{
           res.push(
             <tr style={{ borderBottom: "1px solid black" }}>
-              <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{getFull(simulatorValues[j])}</th>
+              <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
+              <th style={{ width: "70%", fontFamily: "monospace" }}>{getFull(simulatorValues[j])}</th>
             </tr>
           )
         }
