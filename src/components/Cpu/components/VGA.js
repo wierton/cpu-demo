@@ -11,6 +11,19 @@ const header = [
   "gp", "sp", "fp", "ra",
 ]
 
+const getFull=(str)=>{
+  let addLen=10-str.length
+  let res=str
+  if(addLen>0){
+    let remainStr=str.substring(2)
+    for(let i=0;i<addLen;i++){
+      remainStr='0'+remainStr
+    }
+    res='0x'+remainStr
+  }
+  return res
+}
+
 const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError, header) => {
   // console.log(log)
   let closedDistance = Infinity;
@@ -52,7 +65,7 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
         res.push(
           <tr style={{ borderBottom: "1px solid black" }}>
             <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}>{cpuValues[j]}</th>
+            <th style={{ width: "70%" }}>{getFull(cpuValues[j])}</th>
           </tr>
         )
       }
@@ -61,7 +74,7 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
         res.push(
           <tr style={{ borderBottom: "1px solid black" }}>
             <th style={{ width: "30%" }}>{header[j]}</th>
-            <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+            <th style={{ width: "70%" }}>{getFull(simulatorValues[j])}</th>
           </tr>
         )
       }
@@ -76,14 +89,14 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
           res.push(
             <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
               <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{cpuValues[j]}</th>
+              <th style={{ width: "70%" }}>{getFull(cpuValues[j])}</th>
             </tr>
           )
         }else{
           res.push(
             <tr style={{ borderBottom: "1px solid black" }}>
               <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{cpuValues[j]}</th>
+              <th style={{ width: "70%" }}>{getFull(cpuValues[j])}</th>
             </tr>
           )
         }
@@ -95,14 +108,14 @@ const printVGALog = (log, cycle, type, changeStyle, removeErrorCircle, setError,
           res.push(
             <tr style={{ borderBottom: "1px solid black", background: 'red' }}>
               <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+              <th style={{ width: "70%" }}>{getFull(simulatorValues[j])}</th>
             </tr>
           )
         }else{
           res.push(
             <tr style={{ borderBottom: "1px solid black" }}>
               <th style={{ width: "30%" }}>{header[j]}</th>
-              <th style={{ width: "70%" }}>{simulatorValues[j]}</th>
+              <th style={{ width: "70%" }}>{getFull(simulatorValues[j])}</th>
             </tr>
           )
         }
