@@ -334,7 +334,6 @@ export default function VGA({ program, hasbug, hasDiff, cycle, changeStyle, remo
         paddingLeft: '15px',
       }}
       >
-        menu
       </div>
       <div style={{
         width: '100%',

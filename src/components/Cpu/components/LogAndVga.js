@@ -37,7 +37,7 @@ const printVGALog = (log, cycle, type, setError, header) => {
   cpuValue = cpuValue.slice(1, cpuValue.length - 1);
   simulatorValue = simulatorValue.slice(1, simulatorValue.length - 1);
 
-  let cpuValues = cpuValue?cpuValue.split(","):[];
+  let cpuValues = cpuValue ? cpuValue.split(",") : [];
   let simulatorValues = simulatorValue.split(",");
   cpuValues = cpuValues.map(e => e.trim());
   simulatorValues = simulatorValues.map(e => e.trim());
@@ -46,7 +46,7 @@ const printVGALog = (log, cycle, type, setError, header) => {
   const min = cpuLen < simulatorLen ? cpuLen : simulatorLen
 
   if (isEqual) {
-    if(type==='cpu'){
+    if (type === 'cpu') {
       for (let j = 0; j < cpuLen; j++) {
         res.push(
           <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
@@ -55,7 +55,7 @@ const printVGALog = (log, cycle, type, setError, header) => {
           </tr>
         )
       }
-    }else if(type==='simulator'){
+    } else if (type === 'simulator') {
       for (let j = 0; j < simulatorLen; j++) {
         res.push(
           <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
@@ -67,16 +67,16 @@ const printVGALog = (log, cycle, type, setError, header) => {
     }
   } else {
     hasErrorflag = true
-    if(type==='cpu'){
+    if (type === 'cpu') {
       for (let j = 0; j < cpuLen; j++) {
-        if(simulatorLen>j&&cpuValues[j]!==simulatorValues[j]){
+        if (simulatorLen > j && cpuValues[j] !== simulatorValues[j]) {
           res.push(
             <tr style={{ borderBottom: "1px solid black", background: 'red', fontFamily: "monospace" }}>
               <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
               <th style={{ width: "70%", fontFamily: "monospace" }}>{cpuValues[j]}</th>
             </tr>
           )
-        }else{
+        } else {
           res.push(
             <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
               <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
@@ -85,16 +85,16 @@ const printVGALog = (log, cycle, type, setError, header) => {
           )
         }
       }
-    }else if(type==='simulator'){
+    } else if (type === 'simulator') {
       for (let j = 0; j < simulatorLen; j++) {
-        if(cpuLen>j&&simulatorValues[j]!=cpuValues[j]){
+        if (cpuLen > j && simulatorValues[j] != cpuValues[j]) {
           res.push(
             <tr style={{ borderBottom: "1px solid black", background: 'red', fontFamily: "monospace" }}>
               <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
               <th style={{ width: "70%", fontFamily: "monospace" }}>{simulatorValues[j]}</th>
             </tr>
           )
-        }else{
+        } else {
           res.push(
             <tr style={{ borderBottom: "1px solid black", fontFamily: "monospace" }}>
               <th style={{ width: "30%", fontFamily: "monospace" }}>{header[j]}</th>
@@ -112,9 +112,9 @@ const printVGALog = (log, cycle, type, setError, header) => {
 
     setError(prev => {
       if (prev) {
-        if(prev.cycle<errorcycle){
+        if (prev.cycle < errorcycle) {
           return prev
-        }else{
+        } else {
           return { cycle: errorcycle }
         }
       } else {
@@ -207,7 +207,7 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
             const third = register.indexOf(",", right + 1);
 
             const currentCycle = parseInt(register.slice(0, first).trim());
-            const isEqual = register.slice(first + 1, second).trim()==='true'?true:false;
+            const isEqual = register.slice(first + 1, second).trim() === 'true' ? true : false;
             const cpuValue = register.slice(second + 1, third).trim();
             const simulatorValue = register.slice(third + 1).trim();
             registersArray.push({ cycle: currentCycle, isEqual, cpuValue, simulatorValue })
@@ -280,7 +280,7 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
         })))
     }
   }, [VGALog, currentCycle, error])
-// console.log(error)
+  // console.log(error)
   // useEffect(() => {
   //   if (error) {
   //     clearInterval(logIntervalInstance)
@@ -292,7 +292,7 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
   return (
     <div
       style={{
-        width: '800px',
+        width: '630px',
         fontFamily: "monospace",
         ...mouseEnterStyle
       }}
@@ -320,31 +320,44 @@ export default function LogAndVGA({ program, hasbug, hasDiff, cycle, needInterva
         fontFamily: "monospace",
       }}
       >
-        menu
       </div>
-      <Row>
-        <Col span={12}>
-          <div
-            id='logandvgascrolldiv'
-            style={{ width: '400px', height: '250px', lineHeight: '18px', overflowX: 'scroll', overflowY: 'scroll', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 0px 10px', fontFamily: "monospace" }}>
-            {displayLog}
-          </div>
-        </Col>
-        <Col span={12}>
-          <div style={{
-            width: '230px',
+      <div
+        style={{
+          width: '630px',
+          height: '250px',
+        }}
+      >
+        <div
+          id='logandvgascrolldiv'
+          style={{
+            width: '400px',
             height: '250px',
-            overflow: 'scroll',
-            backgroundColor: '#C0C0C0',
-            color: 'black',
-            borderRadius: '0px 0px 10px 0px',
+            lineHeight: '18px',
+            overflowX: 'scroll',
+            overflowY: 'scroll',
+            backgroundColor: 'black',
+            color: 'white',
             padding: '5px',
+            borderRadius: '0px 0px 0px 10px',
             fontFamily: "monospace",
+            float: 'left'
           }}>
-            {displayVGALog}
-          </div>
-        </Col>
-      </Row>
+          {displayLog}
+        </div>
+        <div style={{
+          width: '230px',
+          height: '250px',
+          overflow: 'scroll',
+          backgroundColor: '#FFFAF0',
+          color: 'black',
+          borderRadius: '0px 0px 10px 0px',
+          padding: '5px',
+          fontFamily: "monospace",
+          float: 'left'
+        }}>
+          {displayVGALog}
+        </div>
+      </div>
 
     </div>
   )

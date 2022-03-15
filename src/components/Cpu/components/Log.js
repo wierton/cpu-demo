@@ -144,7 +144,7 @@ export default function Log({ program, hasbug, hasDiff, cycle, needInterval }) {
         setMouseEnterStyle({})
       }}
     >
-      <div style={{ width: '400px', height: '25px', backgroundColor: '#AAAAAA', borderRadius: '10px 10px 0px 0px', color: 'white', paddingLeft: '15px', fontFamily: "monospace" }}>menu</div>
+      <div style={{ width: '400px', height: '25px', backgroundColor: '#AAAAAA', borderRadius: '10px 10px 0px 0px', color: 'white', paddingLeft: '15px', fontFamily: "monospace" }}></div>
       <div
         id="scrolldiv"
         style={{ width: '400px', height: '300px', lineHeight: '18px', overflow: 'auto', backgroundColor: 'black', color: 'white', padding: '5px', borderRadius: '0px 0px 10px 10px', fontFamily: "monospace" }}

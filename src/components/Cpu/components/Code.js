@@ -13,6 +13,8 @@ import BRUCode from '../../../resources/core/bru.scala'
 import LSUCode from '../../../resources/core/lsu.scala'
 import TLBCode from '../../../resources/core/tlb.scala'
 
+const reactStringReplace = require('react-string-replace')
+
 var _ = require('lodash')
 
 const mapper = {
@@ -40,8 +42,32 @@ const traverse = (jsonData, prefix = '') => {
   return res
 }
 
-const findClosed = (signals, cycleNum) => {
+const decorateCodeMapper = {
+  "class\u00a0": 'yellow',
+  "abstract\u00a0": 'red',
+  "{":"blue",
+  "}":"blue",
+  "val\u00a0":"green",
+  "import":"maroon",
+  "package":"olive",
+  "\u00a0=\u00a0":"yellow",
+  ":=":"bisque",
+  "->":"red",
+  "(":"cornflowerblue",
+  ")":"cornflowerblue",
+  "when":"orange",
+}
 
+const decorateCode = (str) => {
+  let replacedText = str;
+  for (let key in decorateCodeMapper) {
+    replacedText = reactStringReplace(replacedText,
+      key, (match, i) => (
+        <span style={{ color: decorateCodeMapper[key] }}>{match}</span>
+      ));
+  }
+  console.log(replacedText)
+  return replacedText
 }
 
 export default function Code({
@@ -92,7 +118,7 @@ export default function Code({
         // console.log(`./programs/${program ? program : 'linux'}/${hasbug ? "has" : "no"}_bug_${hasDiff ? "has" : "no"}_diff/noop-signals.txt`)
         // console.log(cycleNum, closedIndex)
         if (closedIndex >= 0) {
-          
+
           let sig = signals[closedIndex]
           // console.log(sig)
           const first = sig.indexOf(':')
@@ -134,7 +160,6 @@ export default function Code({
         paddingLeft: '15px',
       }}
       >
-        menu
       </div>
       <div style={{
         width: '100%',
@@ -142,9 +167,11 @@ export default function Code({
         overflow: 'scroll',
         backgroundColor: 'black',
         color: 'white',
-        borderRadius: '0px 0px 10px 10px'
+        borderRadius: '0px 0px 10px 10px',
+        fontFamily: 'monospace'
       }}>
         {variableStatus && rows ? rows.map(row => {
+          let replacedText = decorateCode(row.replaceAll(' ', '\u00a0\u00a0'));
           let tooltips = []
           for (let s in variableStatus) {
             if (row.includes(s)) {
@@ -154,15 +181,19 @@ export default function Code({
           // console.log(tooltips)
           if (tooltips.length === 0) {
             return (
-              <p style={{ marginBottom: '1px' }}>
+              <p
+                style={{ marginBottom: '1px' }}
+              >
                 &nbsp;&nbsp;
-                {row.replaceAll(' ', '\u00a0\u00a0')}
+                {replacedText}
                 &nbsp;&nbsp;
               </p>
             )
           } else {
             return (
-              <p style={{ marginBottom: '1px' }}>
+              <p
+                style={{ marginBottom: '1px' }}
+              >
                 <Tooltip title={tooltips.map(t => {
                   return (
                     <>
@@ -176,17 +207,20 @@ export default function Code({
                   destroyTooltipOnHide={true}
                 >
                   &nbsp;&nbsp;
-                  {row.replaceAll(' ', '\u00a0\u00a0')}
+                  {replacedText}
                   &nbsp;&nbsp;
                 </Tooltip>
               </p>
             )
           }
         }) : rows.map(row => {
+          let replacedText = decorateCode(row.replaceAll(' ', '\u00a0\u00a0'));
           return (
-            <p style={{ marginBottom: '1px' }}>
+            <p
+              style={{ marginBottom: '1px' }}
+            >
               &nbsp;&nbsp;
-              {row.replaceAll(' ', '\u00a0\u00a0')}
+              {replacedText}
               &nbsp;&nbsp;
             </p>
           )

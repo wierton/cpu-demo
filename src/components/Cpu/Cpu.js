@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import { Graph } from '@antv/x6'
 import '@antv/x6-react-shape'
-import { Slider, Button, Select, Row, Col } from 'antd'
+import { Slider, Button, Select, Row, Col, Switch } from 'antd'
 import 'antd/dist/antd.css'
 import { StepBackwardOutlined, StepForwardOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
 import mapData from './map.json'
 import { Board, BackGroundImage, MapperNode, Code, Log, VGA, LogAndVGA } from "./components"
+import './cpu.css'
 
 import picture1 from '../../images/pic1.png'
 import picture2 from '../../images/pic2.png'
@@ -778,10 +779,9 @@ export default function Cpu() {
       graphInstance.removeNode('image4-node');
       graphInstance.removeNode('image6-node');
 
-
       const image4Node = graphInstance.addNode({
         id: 'image4-node',
-        x: 490,
+        x: 565,
         y: 850,
         shape: 'image-node',
         component:
@@ -847,7 +847,7 @@ export default function Cpu() {
               id: "image4-port5",
               group: 'port',
               args: {
-                x: 303,
+                x: 233,
                 y: 150,
               },
               size: {
@@ -859,7 +859,7 @@ export default function Cpu() {
               id: "image4-port6",
               group: 'port',
               args: {
-                x: 303,
+                x: 233,
                 y: 155,
               },
               size: {
@@ -871,7 +871,7 @@ export default function Cpu() {
               id: "image4-port7",
               group: 'port',
               args: {
-                x: 303,
+                x: 233,
                 y: 160,
               },
               size: {
@@ -883,7 +883,7 @@ export default function Cpu() {
               id: "image4-port8",
               group: 'port',
               args: {
-                x: 303,
+                x: 233,
                 y: 165,
               },
               size: {
@@ -923,8 +923,6 @@ export default function Cpu() {
         target: { cell: image4Node, port: 'image4-port4' },
         router: 'orth'
       })
-
-
 
       const image5Node = graphInstance.addNode({
         id: 'image5-node',
@@ -1012,426 +1010,7 @@ export default function Cpu() {
         router: 'orth'
       })
 
-      const image6Node = graphInstance.addNode({
-        id: 'image6-node',
-        x: 810,
-        y: 700,
-        shape: 'image-node',
-        component:
-          <LogAndVGA
-            program={program}
-            hasbug={hasBug}
-            hasDiff={hasDiff}
-            cycle={cycle}
-          />,
-        ports: {
-          items: [
-            {
-              id: "image6-port1",
-              group: 'port',
-              args: {
-                x: 91,
-                y: -5,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port2",
-              group: 'port',
-              args: {
-                x: 96,
-                y: -5,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port3",
-              group: 'port',
-              args: {
-                x: 101,
-                y: -5,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port4",
-              group: 'port',
-              args: {
-                x: 106,
-                y: -5,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port5",
-              group: 'port',
-              args: {
-                x: 440,
-                y: 277,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port6",
-              group: 'port',
-              args: {
-                x: 445,
-                y: 277,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port7",
-              group: 'port',
-              args: {
-                x: 450,
-                y: 277,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-            {
-              id: "image6-port8",
-              group: 'port',
-              args: {
-                x: 455,
-                y: 277,
-              },
-              size: {
-                width: 3,
-                height: 3,
-              },
-            },
-          ]
-        }
-      })
-
-      graphInstance.addEdge({
-        id: 'cs1',
-        shape: 'green-edge',
-        source: { cell: 'image6-node', port: 'image6-port5' },
-        target: { cell: image4Node, port: 'image4-port5' },
-        // router: 'orth',
-        vertices: [
-          { x: 1251, y: 1002 },
-        ],
-      })
-      graphInstance.addEdge({
-        id: 'cs2',
-        shape: 'green-edge',
-        source: { cell: 'image6-node', port: 'image6-port6' },
-        target: { cell: image4Node, port: 'image4-port6' },
-        // router: 'orth'
-        vertices: [
-          { x: 1256, y: 1007 },
-        ],
-      })
-      graphInstance.addEdge({
-        id: 'cs3',
-        shape: 'green-edge',
-        source: { cell: 'image6-node', port: 'image6-port7' },
-        target: { cell: image4Node, port: 'image4-port7' },
-        // router: 'orth'
-        vertices: [
-          { x: 1261, y: 1012 },
-        ],
-      })
-      graphInstance.addEdge({
-        id: 'cs4',
-        shape: 'green-edge',
-        source: { cell: 'image6-node', port: 'image6-port8' },
-        target: { cell: image4Node, port: 'image4-port8' },
-        // router: 'orth',
-        vertices: [
-          { x: 1266, y: 1017 },
-        ],
-      })
-
-    }
-
-    if (graphInstance && currentDisplayCodeNode && !isStart) {
-      graphInstance.removeNode(currentDisplayCodeNode + '-code')
-      graphInstance.addNode({
-        id: currentDisplayCodeNode + '-code',
-        x: 900,
-        y: 50,
-        shape: 'react-shape',
-        component:
-          <Code
-            id={currentDisplayCodeNode}
-            cycle={cycle}
-            hasDiff={hasDiff}
-            program={program}
-            hasbug={hasBug}
-          />
-      })
-    }
-  }, [graphInstance, program, hasBug, cycle, isStart])
-
-  useEffect(() => {
-    if (addInterval) {
-      if (graphInstance) {
-        graphInstance.removeNode('image5-node');
-        graphInstance.removeNode('image4-node');
-        graphInstance.removeNode('image6-node');
-
-        const image4Node = graphInstance.addNode({
-          id: 'image4-node',
-          x: 490,
-          y: 850,
-          shape: 'image-node',
-          component:
-            <VGA
-              program={program}
-              hasbug={hasBug}
-              hasDiff={hasDiff}
-              cycle={cycle}
-              changeStyle={changeStyle}
-              removeErrorCircle={removeErrorCircle}
-              needInterval={{ maxCycle, setCycle, setIsStart, setAddInterval }}
-            />,
-          ports: {
-            items: [
-              {
-                id: "image4-port1",
-                group: 'port',
-                args: {
-                  x: 141,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port2",
-                group: 'port',
-                args: {
-                  x: 146,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port3",
-                group: 'port',
-                args: {
-                  x: 151,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port4",
-                group: 'port',
-                args: {
-                  x: 156,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port5",
-                group: 'port',
-                args: {
-                  x: 303,
-                  y: 150,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port6",
-                group: 'port',
-                args: {
-                  x: 303,
-                  y: 155,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port7",
-                group: 'port',
-                args: {
-                  x: 303,
-                  y: 160,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image4-port8",
-                group: 'port',
-                args: {
-                  x: 303,
-                  y: 165,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-            ]
-          }
-        })
-
-        graphInstance.addEdge({
-          id: 'axi4vga1',
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'GPIO-port1' },
-          target: { cell: image4Node, port: 'image4-port1' },
-          router: 'orth'
-        })
-        graphInstance.addEdge({
-          id: 'axi4vga2',
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'GPIO-port2' },
-          target: { cell: image4Node, port: 'image4-port2' },
-          router: 'orth'
-        })
-        graphInstance.addEdge({
-          id: 'axi4vga3',
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'GPIO-port3' },
-          target: { cell: image4Node, port: 'image4-port3' },
-          router: 'orth'
-        })
-        graphInstance.addEdge({
-          id: 'axi4vga4',
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'GPIO-port4' },
-          target: { cell: image4Node, port: 'image4-port4' },
-          router: 'orth'
-        })
-
-        const image5Node = graphInstance.addNode({
-          id: 'image5-node',
-          x: 150,
-          y: 770,
-          shape: 'image-node',
-          component:
-            <Log
-              program={program}
-              hasbug={hasBug}
-              hasDiff={hasDiff}
-              cycle={cycle}
-              needInterval={{ maxCycle, setCycle }}
-            />,
-          ports: {
-            items: [
-              {
-                id: "image5-port1",
-                group: 'port',
-                args: {
-                  x: 41,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image5-port2",
-                group: 'port',
-                args: {
-                  x: 46,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image5-port3",
-                group: 'port',
-                args: {
-                  x: 51,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-              {
-                id: "image5-port4",
-                group: 'port',
-                args: {
-                  x: 56,
-                  y: -5,
-                },
-                size: {
-                  width: 3,
-                  height: 3,
-                },
-              },
-            ]
-          }
-        })
-
-        graphInstance.addEdge({
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'ULIFE-port1' },
-          target: { cell: 'image5-node', port: 'image5-port1' },
-          router: 'orth'
-        })
-        graphInstance.addEdge({
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'ULIFE-port2' },
-          target: { cell: 'image5-node', port: 'image5-port2' },
-          router: 'orth'
-        })
-        graphInstance.addEdge({
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'ULIFE-port3' },
-          target: { cell: 'image5-node', port: 'image5-port3' },
-          router: 'orth'
-        })
-        graphInstance.addEdge({
-          shape: 'green-edge',
-          source: { cell: 'board', port: 'ULIFE-port4' },
-          target: { cell: 'image5-node', port: 'image5-port4' },
-          router: 'orth'
-        })
+      if (hasDiff) {
 
         const image6Node = graphInstance.addNode({
           id: 'image6-node',
@@ -1444,7 +1023,6 @@ export default function Cpu() {
               hasbug={hasBug}
               hasDiff={hasDiff}
               cycle={cycle}
-              needInterval={{ maxCycle, setCycle }}
             />,
           ports: {
             items: [
@@ -1588,11 +1166,437 @@ export default function Cpu() {
             { x: 1266, y: 1017 },
           ],
         })
+      }
+    }
+
+    if (graphInstance && currentDisplayCodeNode && !isStart) {
+      graphInstance.removeNode(currentDisplayCodeNode + '-code')
+      graphInstance.addNode({
+        id: currentDisplayCodeNode + '-code',
+        x: 900,
+        y: 50,
+        shape: 'react-shape',
+        component:
+          <Code
+            id={currentDisplayCodeNode}
+            cycle={cycle}
+            hasDiff={hasDiff}
+            program={program}
+            hasbug={hasBug}
+          />
+      })
+    }
+  }, [graphInstance, program, hasBug, cycle, isStart, hasDiff])
+
+  useEffect(() => {
+    if (addInterval) {
+      if (graphInstance) {
+        graphInstance.removeNode('image5-node');
+        graphInstance.removeNode('image4-node');
+        graphInstance.removeNode('image6-node');
+
+        const image4Node = graphInstance.addNode({
+          id: 'image4-node',
+          x: 565,
+          y: 850,
+          shape: 'image-node',
+          component:
+            <VGA
+              program={program}
+              hasbug={hasBug}
+              hasDiff={hasDiff}
+              cycle={cycle}
+              changeStyle={changeStyle}
+              removeErrorCircle={removeErrorCircle}
+              needInterval={{ maxCycle, setCycle, setIsStart, setAddInterval }}
+            />,
+          ports: {
+            items: [
+              {
+                id: "image4-port1",
+                group: 'port',
+                args: {
+                  x: 141,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port2",
+                group: 'port',
+                args: {
+                  x: 146,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port3",
+                group: 'port',
+                args: {
+                  x: 151,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port4",
+                group: 'port',
+                args: {
+                  x: 156,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port5",
+                group: 'port',
+                args: {
+                  x: 233,
+                  y: 150,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port6",
+                group: 'port',
+                args: {
+                  x: 233,
+                  y: 155,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port7",
+                group: 'port',
+                args: {
+                  x: 233,
+                  y: 160,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image4-port8",
+                group: 'port',
+                args: {
+                  x: 233,
+                  y: 165,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+            ]
+          }
+        })
+
+        graphInstance.addEdge({
+          id: 'axi4vga1',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'GPIO-port1' },
+          target: { cell: image4Node, port: 'image4-port1' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          id: 'axi4vga2',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'GPIO-port2' },
+          target: { cell: image4Node, port: 'image4-port2' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          id: 'axi4vga3',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'GPIO-port3' },
+          target: { cell: image4Node, port: 'image4-port3' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          id: 'axi4vga4',
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'GPIO-port4' },
+          target: { cell: image4Node, port: 'image4-port4' },
+          router: 'orth'
+        })
+
+        const image5Node = graphInstance.addNode({
+          id: 'image5-node',
+          x: 150,
+          y: 770,
+          shape: 'image-node',
+          component:
+            <Log
+              program={program}
+              hasbug={hasBug}
+              hasDiff={hasDiff}
+              cycle={cycle}
+              needInterval={{ maxCycle, setCycle }}
+            />,
+          ports: {
+            items: [
+              {
+                id: "image5-port1",
+                group: 'port',
+                args: {
+                  x: 41,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image5-port2",
+                group: 'port',
+                args: {
+                  x: 46,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image5-port3",
+                group: 'port',
+                args: {
+                  x: 51,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+              {
+                id: "image5-port4",
+                group: 'port',
+                args: {
+                  x: 56,
+                  y: -5,
+                },
+                size: {
+                  width: 3,
+                  height: 3,
+                },
+              },
+            ]
+          }
+        })
+
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port1' },
+          target: { cell: 'image5-node', port: 'image5-port1' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port2' },
+          target: { cell: 'image5-node', port: 'image5-port2' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port3' },
+          target: { cell: 'image5-node', port: 'image5-port3' },
+          router: 'orth'
+        })
+        graphInstance.addEdge({
+          shape: 'green-edge',
+          source: { cell: 'board', port: 'ULIFE-port4' },
+          target: { cell: 'image5-node', port: 'image5-port4' },
+          router: 'orth'
+        })
+
+        if (hasDiff) {
+          graphInstance.removeNode('image6-node');
+          const image6Node = graphInstance.addNode({
+            id: 'image6-node',
+            x: 810,
+            y: 700,
+            shape: 'image-node',
+            component:
+              <LogAndVGA
+                program={program}
+                hasbug={hasBug}
+                hasDiff={hasDiff}
+                cycle={cycle}
+                needInterval={{ maxCycle, setCycle }}
+              />,
+            ports: {
+              items: [
+                {
+                  id: "image6-port1",
+                  group: 'port',
+                  args: {
+                    x: 91,
+                    y: -5,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port2",
+                  group: 'port',
+                  args: {
+                    x: 96,
+                    y: -5,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port3",
+                  group: 'port',
+                  args: {
+                    x: 101,
+                    y: -5,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port4",
+                  group: 'port',
+                  args: {
+                    x: 106,
+                    y: -5,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port5",
+                  group: 'port',
+                  args: {
+                    x: 440,
+                    y: 277,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port6",
+                  group: 'port',
+                  args: {
+                    x: 445,
+                    y: 277,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port7",
+                  group: 'port',
+                  args: {
+                    x: 450,
+                    y: 277,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+                {
+                  id: "image6-port8",
+                  group: 'port',
+                  args: {
+                    x: 455,
+                    y: 277,
+                  },
+                  size: {
+                    width: 3,
+                    height: 3,
+                  },
+                },
+              ]
+            }
+          })
+
+          graphInstance.addEdge({
+            id: 'cs1',
+            shape: 'green-edge',
+            source: { cell: 'image6-node', port: 'image6-port5' },
+            target: { cell: image4Node, port: 'image4-port5' },
+            // router: 'orth',
+            vertices: [
+              { x: 1251, y: 1002 },
+            ],
+          })
+          graphInstance.addEdge({
+            id: 'cs2',
+            shape: 'green-edge',
+            source: { cell: 'image6-node', port: 'image6-port6' },
+            target: { cell: image4Node, port: 'image4-port6' },
+            // router: 'orth'
+            vertices: [
+              { x: 1256, y: 1007 },
+            ],
+          })
+          graphInstance.addEdge({
+            id: 'cs3',
+            shape: 'green-edge',
+            source: { cell: 'image6-node', port: 'image6-port7' },
+            target: { cell: image4Node, port: 'image4-port7' },
+            // router: 'orth'
+            vertices: [
+              { x: 1261, y: 1012 },
+            ],
+          })
+          graphInstance.addEdge({
+            id: 'cs4',
+            shape: 'green-edge',
+            source: { cell: 'image6-node', port: 'image6-port8' },
+            target: { cell: image4Node, port: 'image4-port8' },
+            // router: 'orth',
+            vertices: [
+              { x: 1266, y: 1017 },
+            ],
+          })
+        }
+
 
       }
     }
 
-  }, [addInterval, setAddInterval])
+  }, [addInterval, setAddInterval, hasDiff])
 
   useEffect(() => {
     if (cycle !== maxCycle && !addInterval) {
@@ -1660,46 +1664,51 @@ export default function Cpu() {
       router: 'orth'
     })
 
-    graphInstance.addEdge({
-      id: 'cs1',
-      shape: 'red-edge',
-      source: { cell: 'image6-node', port: 'image6-port5' },
-      target: { cell: 'image4-node', port: 'image4-port5' },
-      // router: 'orth',
-      vertices: [
-        { x: 1251, y: 1002 },
-      ],
-    })
-    graphInstance.addEdge({
-      id: 'cs2',
-      shape: 'red-edge',
-      source: { cell: 'image6-node', port: 'image6-port6' },
-      target: { cell: 'image4-node', port: 'image4-port6' },
-      // router: 'orth'
-      vertices: [
-        { x: 1256, y: 1007 },
-      ],
-    })
-    graphInstance.addEdge({
-      id: 'cs3',
-      shape: 'red-edge',
-      source: { cell: 'image6-node', port: 'image6-port7' },
-      target: { cell: 'image4-node', port: 'image4-port7' },
-      // router: 'orth'
-      vertices: [
-        { x: 1261, y: 1012 },
-      ],
-    })
-    graphInstance.addEdge({
-      id: 'cs4',
-      shape: 'red-edge',
-      source: { cell: 'image6-node', port: 'image6-port8' },
-      target: { cell: 'image4-node', port: 'image4-port8' },
-      // router: 'orth',
-      vertices: [
-        { x: 1266, y: 1017 },
-      ],
-    })
+    if (hasDiff) {
+
+      graphInstance.addEdge({
+        id: 'cs1',
+        shape: 'red-edge',
+        source: { cell: 'image6-node', port: 'image6-port5' },
+        target: { cell: 'image4-node', port: 'image4-port5' },
+        // router: 'orth',
+        vertices: [
+          { x: 1251, y: 1002 },
+        ],
+      })
+      graphInstance.addEdge({
+        id: 'cs2',
+        shape: 'red-edge',
+        source: { cell: 'image6-node', port: 'image6-port6' },
+        target: { cell: 'image4-node', port: 'image4-port6' },
+        // router: 'orth'
+        vertices: [
+          { x: 1256, y: 1007 },
+        ],
+      })
+      graphInstance.addEdge({
+        id: 'cs3',
+        shape: 'red-edge',
+        source: { cell: 'image6-node', port: 'image6-port7' },
+        target: { cell: 'image4-node', port: 'image4-port7' },
+        // router: 'orth'
+        vertices: [
+          { x: 1261, y: 1012 },
+        ],
+      })
+      graphInstance.addEdge({
+        id: 'cs4',
+        shape: 'red-edge',
+        source: { cell: 'image6-node', port: 'image6-port8' },
+        target: { cell: 'image4-node', port: 'image4-port8' },
+        // router: 'orth',
+        vertices: [
+          { x: 1266, y: 1017 },
+        ],
+      })
+
+    }
+
 
     graphInstance.addNode({
       shape: 'circle',
@@ -1816,7 +1825,7 @@ export default function Cpu() {
           </Select>
         </Col>
         <Col span={3}>
-          <Select defaultValue={false} style={{ width: 120 }}
+          {/* <Select defaultValue={false} style={{ width: 120 }}
             onChange={(value) => {
               setHasDiff(value);
               if (!addInterval) {
@@ -1825,7 +1834,24 @@ export default function Cpu() {
             }}>
             <Select.Option value={false}>无差分</Select.Option>
             <Select.Option value={true}>有差分</Select.Option>
-          </Select>
+          </Select> */}
+          <div style={{
+            width:'100%',
+            paddingLeft:'10%'
+          }}>
+            差分：
+            <Switch
+              defaultChecked={hasDiff}
+              checked={hasDiff}
+              onChange={(value) => {
+                setHasDiff(value);
+                if (!addInterval) {
+                  setCycle(0)
+                }
+              }}
+            />
+          </div>
+
         </Col>
         <Col span={3}>
           <Select defaultValue="linux" style={{ width: 120 }}
@@ -1847,7 +1873,6 @@ export default function Cpu() {
             <Select.Option value="goldbach">goldbach</Select.Option>
             <Select.Option value="hello-str">hello-str</Select.Option>
             <Select.Option value="if-else">if-else</Select.Option>
-            <Select.Option value="icon">icon</Select.Option>
             <Select.Option value="leap-year">leap-year</Select.Option>
             <Select.Option value="linux">linux</Select.Option>
             <Select.Option value="load-store">load-store</Select.Option>
