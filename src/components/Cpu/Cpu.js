@@ -171,9 +171,7 @@ export default function Cpu() {
       container: document.getElementById('container'),
       grid: true,
       panning: true,
-      scroller: {
-        enabled: true,
-      },
+      // scroller: { enabled: true, },
       mousewheel: {
         enabled: true,
         modifiers: ['ctrl', 'meta'],
