@@ -170,6 +170,7 @@ export default function Cpu() {
     const graph = new Graph({
       container: document.getElementById('container'),
       grid: true,
+      panning: true,
       scroller: {
         enabled: true,
       },
