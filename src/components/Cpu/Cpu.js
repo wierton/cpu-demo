@@ -100,7 +100,7 @@ export default function Cpu() {
     if (id && graphInstance) {
       let flag = false
       if (currentDisplayCodeNode) {
-        graphInstance.removeNode(currentDisplayCodeNode + '-code')
+        graphInstance.removeNode(currentDisplayCodeNode /* + '-code' */)
         setCurrentDisplayCodeNode(null)
         if (id !== currentDisplayCodeNode) {
           flag = true

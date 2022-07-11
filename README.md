@@ -4,7 +4,9 @@
 3. 脚手架 create-react-app
 
 ## 安装依赖
-```npm install```
+```
+npm install
+```
 
 ## 运行
 ```npm start```
