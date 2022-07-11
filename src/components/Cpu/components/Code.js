@@ -89,7 +89,6 @@ export default function Code({
   const [mouseEnterStyle, setMouseEnterStyle] = useState({})
   const [errors, setErrors] = useState([])
   useEffect(() => {
-    // console.log(id, ' ', cycle)
     if (mapper.hasOwnProperty(id)) {
       fetch(mapper[id])
         .then(r => r.text())
@@ -102,7 +101,7 @@ export default function Code({
         .then(res => res.json())
         .then(res => {
           const { error } = res
-          if (error) {
+          if (error && error.hasOwnProperty(id)) {
             setErrors(error[id])
           }
         })

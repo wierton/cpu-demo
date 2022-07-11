@@ -110,7 +110,7 @@ export default function Cpu() {
       }
       if (flag) {
         graphInstance.addNode({
-          id: id + '-code',
+          id: id /* + '-code' */,
           x: 900,
           y: 50,
           shape: 'react-shape',
