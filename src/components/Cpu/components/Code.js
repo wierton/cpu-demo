@@ -186,7 +186,7 @@ export default function Code({
         backgroundColor: 'black',
         color: 'white',
         borderRadius: '0px 0px 10px 10px',
-        fontFamily: "Consolas, 'Courier New', monospace"
+        fontFamily: "Consolas, 'Courier New', consolas"
       }}>
         {variableStatus && rows ? rows.map((row, index) => {
           let spaceCount = 0;
