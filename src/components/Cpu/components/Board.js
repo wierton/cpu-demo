@@ -180,6 +180,9 @@ export default function Board({
     const graph = new Graph({
       container: document.getElementById(containerID),
       grid: false,
+      interacting: function (cellView) {
+        return { nodeMovable: false }
+      },
     })
 
     // elk.layout(elkdata,{
