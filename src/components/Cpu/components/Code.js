@@ -12,6 +12,7 @@ import ISUCode from '../../../resources/core/isu.scala'
 import BRUCode from '../../../resources/core/bru.scala'
 import LSUCode from '../../../resources/core/lsu.scala'
 import TLBCode from '../../../resources/core/tlb.scala'
+import MSUCode from '../../../resources/core/msu.scala'
 
 const reactStringReplace = require('react-string-replace')
 
@@ -26,6 +27,7 @@ const mapper = {
   'LSU': LSUCode,
   'TLB': TLBCode,
   'CP0': CP0Code,
+  'WBU': MSUCode,
 }
 
 const traverse = (jsonData, prefix = '') => {
