@@ -1169,9 +1169,9 @@ export default function Cpu() {
     }
 
     if (graphInstance && currentDisplayCodeNode && !isStart) {
-      graphInstance.removeNode(currentDisplayCodeNode + '-code')
+      graphInstance.removeNode(currentDisplayCodeNode /* + '-code' */)
       graphInstance.addNode({
-        id: currentDisplayCodeNode + '-code',
+        id: currentDisplayCodeNode /* + '-code' */,
         x: 900,
         y: 50,
         shape: 'react-shape',
